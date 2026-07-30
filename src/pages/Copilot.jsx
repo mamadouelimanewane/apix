@@ -37,55 +37,44 @@ const Copilot = () => {
     setInputValue('');
     setIsTyping(true);
 
-    const apiKey = import.meta.env.VITE_PERPLEXITY_API_KEY;
-
-    if (!apiKey) {
-      // Fallback si pas de clé (Mode Demo)
-      setTimeout(() => {
-        let botResponse = "Je n'ai pas cette information précise dans ma base de connaissances. Souhaitez-vous que je vous mette en relation avec un expert de l'APIX ?";
-        const lowerText = text.toLowerCase();
-        
-        if (lowerText.includes('diamniadio') || lowerText.includes('zes')) {
-          botResponse = "Pour une entreprise agréée au régime des Zones Économiques Spéciales (ZES) comme Diamniadio ou Sandiara, les avantages sont majeurs :\n\n• **Impôt sur les Sociétés (IS)** : Fixé à 15% (au lieu de 30%).\n• **TVA** : Exonération totale sur les achats locaux et les importations.\n\nL'agrément est délivré sous 30 jours par l'APIX.";
-        }
-        
-        setMessages(prev => [...prev, { 
-          id: Date.now() + 1, 
-          sender: 'bot', 
-          text: botResponse,
-          timestamp: new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
-        }]);
-        setIsTyping(false);
-      }, 1500);
-      return;
-    }
-
-    // Appel réel à l'API Perplexity (Connecté à Internet)
+    // Appel via la fonction serverless /api/copilot (la clé reste côté serveur)
     try {
       const history = currentMessages.map(m => ({
         role: m.sender === 'bot' ? 'assistant' : 'user',
         content: m.text
       }));
 
-      const body = {
-        model: 'llama-3.1-sonar-small-128k-online', // Modèle connecté au web
-        messages: [
-          { role: 'system', content: "Tu es Copilot Invest, un assistant virtuel expert du Sénégal, conçu par l'APIX (Agence pour la Promotion des Investissements). Tu aides les investisseurs avec précision. Sois courtois, professionnel et utilise du markdown (puces, gras) pour aérer tes réponses. Cite tes sources quand c'est pertinent." },
-          ...history
-        ]
-      };
+      const payloadMessages = [
+        { role: 'system', content: "Tu es Copilot Invest, un assistant virtuel expert du Sénégal, conçu par l'APIX (Agence pour la Promotion des Investissements). Tu aides les investisseurs avec précision. Sois courtois, professionnel et utilise du markdown (puces, gras) pour aérer tes réponses. Cite tes sources quand c'est pertinent." },
+        ...history
+      ];
 
-      const res = await fetch('https://api.perplexity.ai/chat/completions', {
+      const res = await fetch('/api/copilot', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${apiKey}`
-        },
-        body: JSON.stringify(body)
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages: payloadMessages })
       });
 
       const data = await res.json();
-      
+
+      if (data.demo) {
+        // Fallback si aucune clé n'est configurée côté serveur (Mode Demo)
+        let botResponse = "Je n'ai pas cette information précise dans ma base de connaissances. Souhaitez-vous que je vous mette en relation avec un expert de l'APIX ?";
+        const lowerText = text.toLowerCase();
+
+        if (lowerText.includes('diamniadio') || lowerText.includes('zes')) {
+          botResponse = "Pour une entreprise agréée au régime des Zones Économiques Spéciales (ZES) comme Diamniadio ou Sandiara, les avantages sont majeurs :\n\n• **Impôt sur les Sociétés (IS)** : Fixé à 15% (au lieu de 30%).\n• **TVA** : Exonération totale sur les achats locaux et les importations.\n\nL'agrément est délivré sous 30 jours par l'APIX.";
+        }
+
+        setMessages(prev => [...prev, {
+          id: Date.now() + 1,
+          sender: 'bot',
+          text: botResponse,
+          timestamp: new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
+        }]);
+        return;
+      }
+
       if (data.choices && data.choices.length > 0) {
         setMessages(prev => [...prev, { 
           id: Date.now() + 1, 

@@ -19,19 +19,25 @@ const RegulatoryHub = () => {
     setIsSearching(true);
     setAiResponse(null);
     
-    // Pour une vraie application, ajoutez ces clés dans un fichier .env (VITE_PERPLEXITY_API_KEY et VITE_DEEPSEEK_API_KEY)
-    const apiKey = import.meta.env[`VITE_${aiProvider.toUpperCase()}_API_KEY`];
+    // Appel via la fonction serverless /api/regulatory (la clé reste côté serveur)
+    try {
+      const res = await fetch('/api/regulatory', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ provider: aiProvider, query: searchQuery })
+      });
 
-    if (!apiKey) {
-      // Mode simulation (Fallback) si les clés API ne sont pas configurées
-      setTimeout(() => {
+      const data = await res.json();
+
+      if (data.demo) {
+        // Mode simulation (Fallback) si les clés API ne sont pas configurées côté serveur
         let response = {
           text: `[Mode Simulation ${aiProvider.toUpperCase()}] : Je n'ai pas trouvé d'article spécifique correspondant à votre recherche. Veuillez reformuler ou configurer votre clé d'API.`,
           source: "Corpus Général"
         };
 
         const query = searchQuery.toLowerCase();
-        
+
         if (query.includes('délai') || query.includes('agrément') || query.includes('jour')) {
           response = {
             text: "« L'Agence est tenue de notifier au requérant la décision motivée d'octroi ou de refus d'agrément dans un délai maximum de trente (30) jours à compter de la date de délivrance du récépissé de dépôt du dossier complet. »",
@@ -45,47 +51,9 @@ const RegulatoryHub = () => {
         }
 
         setAiResponse(response);
-        setIsSearching(false);
-      }, 1500);
-      return;
-    }
-
-    // Appel réel aux APIs (OpenAI-compatible)
-    try {
-      let endpoint = '';
-      let body = {};
-
-      if (aiProvider === 'perplexity') {
-        endpoint = 'https://api.perplexity.ai/chat/completions';
-        body = {
-          model: 'llama-3.1-sonar-small-128k-online',
-          messages: [
-            { role: 'system', content: 'Tu es un expert juridique sénégalais du droit des affaires. Cite tes sources.' },
-            { role: 'user', content: searchQuery }
-          ]
-        };
-      } else {
-        endpoint = 'https://api.deepseek.com/chat/completions';
-        body = {
-          model: 'deepseek-chat',
-          messages: [
-            { role: 'system', content: 'Tu es un expert juridique du Sénégal. Réponds de façon précise avec les articles de loi.' },
-            { role: 'user', content: searchQuery }
-          ]
-        };
+        return;
       }
 
-      const res = await fetch(endpoint, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${apiKey}`
-        },
-        body: JSON.stringify(body)
-      });
-
-      const data = await res.json();
-      
       if (data.choices && data.choices.length > 0) {
         setAiResponse({
           text: data.choices[0].message.content,
