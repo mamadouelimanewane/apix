@@ -1,16 +1,31 @@
-import React from 'react';
-import { NavLink, Outlet } from 'react-router-dom';
-import { LayoutDashboard, MessageSquare, Map as MapIcon, Calculator, FileText, Users, BookOpen, BarChart3, Landmark, Palmtree, MapPin, Route as RouteIcon, Briefcase, HeadphonesIcon, ShieldCheck, Lock, Layers, Award, Globe, DollarSign } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { NavLink, Outlet, useLocation } from 'react-router-dom';
+import { LayoutDashboard, MessageSquare, Map as MapIcon, Calculator, FileText, Users, BookOpen, BarChart3, Landmark, Palmtree, MapPin, Route as RouteIcon, Briefcase, HeadphonesIcon, ShieldCheck, Lock, Layers, Award, Globe, DollarSign, Menu, X } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
 const SidebarLayout = () => {
   const { t, language, setLanguage } = useLanguage();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
+
+  // Close mobile menu on route change
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [location.pathname]);
 
   return (
     <div className="app-container">
-      <aside className="sidebar">
-        <div className="sidebar-logo">
-          APIX <span>Invest</span>
+      {/* Mobile Overlay */}
+      {isMobileMenuOpen && (
+        <div className="mobile-overlay" onClick={() => setIsMobileMenuOpen(false)}></div>
+      )}
+
+      <aside className={`sidebar ${isMobileMenuOpen ? 'open' : ''}`}>
+        <div className="sidebar-logo" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <div>APIX <span>Invest</span></div>
+          <button className="mobile-only" onClick={() => setIsMobileMenuOpen(false)} style={{ background: 'transparent', border: 'none', color: 'white', cursor: 'pointer' }}>
+            <X size={24} />
+          </button>
         </div>
         <nav className="nav-links">
           <NavLink to="/" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`} end>
@@ -68,36 +83,46 @@ const SidebarLayout = () => {
       </aside>
       <div className="main-content" style={{ padding: 0, display: 'flex', flexDirection: 'column', height: '100vh' }}>
         {/* TOPBAR INTERNATIONALE */}
-        <header style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: '1.5rem', padding: '1rem 2rem', background: 'white', borderBottom: '1px solid rgba(0,0,0,0.05)', height: '70px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', background: 'var(--bg-tertiary)', padding: '6px 12px', borderRadius: '20px' }}>
-            <DollarSign size={16} color="var(--brand-blue)" />
-            <select style={{ background: 'transparent', border: 'none', outline: 'none', fontWeight: 'bold', color: 'var(--text-primary)', cursor: 'pointer' }}>
-              <option>USD ($)</option>
-              <option>EUR (€)</option>
-              <option>XOF (FCFA)</option>
-            </select>
-          </div>
+        <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem 2rem', background: 'white', borderBottom: '1px solid rgba(0,0,0,0.05)', height: '70px' }}>
           
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', background: 'var(--bg-tertiary)', padding: '6px 12px', borderRadius: '20px' }}>
-            <Globe size={16} color="var(--brand-blue)" />
-            <select 
-              value={language}
-              onChange={(e) => setLanguage(e.target.value)}
-              style={{ background: 'transparent', border: 'none', outline: 'none', fontWeight: 'bold', color: 'var(--text-primary)', cursor: 'pointer' }}
-            >
-              <option value="fr">Français (FR)</option>
-              <option value="en">English (EN)</option>
-              <option value="ar">العربية (AR)</option>
-              <option value="zh">中文 (ZH)</option>
-            </select>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <button className="hamburger-btn" onClick={() => setIsMobileMenuOpen(true)}>
+              <Menu size={24} />
+            </button>
+            {/* On Desktop, this area is empty or for future breadcrumbs */}
           </div>
 
-          <div style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'var(--brand-blue)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: 'bold' }}>
-            DG
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', background: 'var(--bg-tertiary)', padding: '6px 12px', borderRadius: '20px' }}>
+              <DollarSign size={16} color="var(--brand-blue)" />
+              <select style={{ background: 'transparent', border: 'none', outline: 'none', fontWeight: 'bold', color: 'var(--text-primary)', cursor: 'pointer' }}>
+                <option>USD ($)</option>
+                <option>EUR (€)</option>
+                <option>XOF (FCFA)</option>
+              </select>
+            </div>
+            
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', background: 'var(--bg-tertiary)', padding: '6px 12px', borderRadius: '20px' }}>
+              <Globe size={16} color="var(--brand-blue)" />
+              <select 
+                value={language}
+                onChange={(e) => setLanguage(e.target.value)}
+                style={{ background: 'transparent', border: 'none', outline: 'none', fontWeight: 'bold', color: 'var(--text-primary)', cursor: 'pointer' }}
+              >
+                <option value="fr">FR</option>
+                <option value="en">EN</option>
+                <option value="ar">AR</option>
+                <option value="zh">ZH</option>
+              </select>
+            </div>
+
+            <div style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'var(--brand-blue)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: 'bold' }}>
+              DG
+            </div>
           </div>
         </header>
 
-        <div style={{ padding: '2rem', height: 'calc(100vh - 70px)', overflowY: 'auto' }}>
+        <div className="main-content-scroll" style={{ padding: '2rem', height: 'calc(100vh - 70px)', overflowY: 'auto' }}>
           <Outlet />
         </div>
       </div>

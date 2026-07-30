@@ -65,7 +65,7 @@ const Dashboard = () => {
         </div>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '2rem', marginBottom: '3rem' }}>
+      <div className="responsive-grid-2-1" style={{ marginBottom: '3rem' }}>
         {/* Chart Section */}
         <div className="card">
           <h3 style={{ marginBottom: '1.5rem', color: 'var(--brand-blue)' }}>{t('dashboard.chart_title')}</h3>

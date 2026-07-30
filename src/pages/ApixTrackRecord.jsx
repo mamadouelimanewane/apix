@@ -48,7 +48,7 @@ const ApixTrackRecord = () => {
             ))}
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1rem', marginTop: '1rem' }}>
+          <div className="responsive-grid-3" style={{ marginTop: '1rem' }}>
             <div style={{ background: 'rgba(0, 150, 57, 0.1)', padding: '1.5rem', borderRadius: '12px', textAlign: 'center' }}>
               <div style={{ fontSize: '2.5rem', fontWeight: 'bold', color: 'var(--accent-primary)' }}>20+</div>
               <div style={{ color: 'var(--brand-blue)', fontWeight: 'bold' }}>Années d'Expertise</div>

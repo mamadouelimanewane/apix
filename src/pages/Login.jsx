@@ -17,7 +17,7 @@ const Login = ({ onLogin }) => {
   };
 
   return (
-    <div style={{
+    <div className="login-container" style={{
       height: '100vh',
       width: '100vw',
       display: 'flex',
@@ -26,7 +26,7 @@ const Login = ({ onLogin }) => {
       fontFamily: 'Inter, sans-serif'
     }}>
       {/* LEFT PANEL - BRANDING */}
-      <div style={{
+      <div className="login-panel" style={{
         flex: 1,
         background: 'linear-gradient(135deg, var(--brand-blue) 0%, #004b2c 100%)',
         display: 'flex',
@@ -70,7 +70,7 @@ const Login = ({ onLogin }) => {
       </div>
 
       {/* RIGHT PANEL - LOGIN */}
-      <div style={{
+      <div className="login-panel" style={{
         flex: 1,
         display: 'flex',
         alignItems: 'center',

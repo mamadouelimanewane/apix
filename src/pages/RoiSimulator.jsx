@@ -48,7 +48,7 @@ const RoiSimulator = () => {
         </div>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '2rem' }}>
+      <div className="responsive-grid-1-2">
         
         {/* COLONNE GAUCHE: Paramètres */}
         <div className="card" style={{ background: '#f8fafc', border: '1px solid #e2e8f0' }}>
@@ -99,7 +99,7 @@ const RoiSimulator = () => {
         <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
           
           {/* KPIs */}
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
+          <div className="responsive-grid-2">
             <div className="card" style={{ borderTop: '4px solid #94a3b8' }}>
               <div style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', fontWeight: 'bold', textTransform: 'uppercase', marginBottom: '8px' }}>
                 {t('roi.net_standard')}
