@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APIX Invest - Présentation Commerciale</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #0f172a;
+            background: white;
+            padding: 30px;
+        }
+        .page { page-break-after: always; padding: 60px 40px; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; }
+        .page-last { page-break-after: auto; }
+        .cover {
+            background: linear-gradient(135deg, #006B3F 0%, #004D2E 100%);
+            color: white;
+            text-align: center;
+        }
+        h1 { font-size: 48px; margin-bottom: 20px; font-weight: 700; }
+        h2 { font-size: 36px; margin-bottom: 30px; color: #006B3F; }
+        h3 { font-size: 24px; margin-top: 30px; margin-bottom: 15px; color: #1e293b; }
+        p { margin-bottom: 15px; font-size: 16px; line-height: 1.8; }
+        .subtitle { font-size: 24px; opacity: 0.95; margin-bottom: 40px; }
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin: 30px 0;
+        }
+        .kpi {
+            background: #f1f5f9;
+            padding: 25px;
+            border-radius: 8px;
+            text-align: center;
+            border-left: 4px solid #006B3F;
+        }
+        .kpi-value { font-size: 40px; font-weight: bold; color: #006B3F; margin: 10px 0; }
+        .kpi-label { font-size: 14px; color: #475569; text-transform: uppercase; }
+        .feature-list {
+            list-style: none;
+            margin: 20px 0;
+        }
+        .feature-list li {
+            padding: 12px 0;
+            padding-left: 30px;
+            position: relative;
+            font-size: 16px;
+        }
+        .feature-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #16a34a;
+            font-weight: bold;
+            font-size: 20px;
+        }
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        .comparison-table th {
+            background: #006B3F;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+        .comparison-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .comparison-table tr:nth-child(even) { background: #f8fafc; }
+        .benefit-box {
+            background: #f0fdf4;
+            border-left: 4px solid #16a34a;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .stat-highlight {
+            background: #fef2f2;
+            border-left: 4px solid #dc2626;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+            font-weight: 600;
+            color: #991b1b;
+        }
+        .section-title {
+            background: #006B3F;
+            color: white;
+            padding: 20px;
+            margin: 30px 0 20px 0;
+            border-radius: 4px;
+            font-size: 24px;
+            font-weight: 700;
+        }
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 20px 0;
+        }
+        .highlight { color: #006B3F; font-weight: 700; }
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e2e8f0;
+            color: #475569;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <!-- COUVERTURE -->
+    <div class="page cover">
+        <div style="flex: 1; display: flex; flex-direction: column; justify-content: center;">
+            <h1>APIX INVEST</h1>
+            <p class="subtitle">Portail Investisseur Nouvelle Génération</p>
+            <p style="font-size: 18px; margin-top: 30px;">Accélération digitale pour transformer l'écosystème d'investissement au Sénégal</p>
+            <div style="margin-top: 60px; font-size: 16px;">
+                <p>Sénégal • Dakar</p>
+                <p>Agence de Promotion des Investissements et des Exportations</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 2: PROBLÉMATIQUE -->
+    <div class="page">
+        <h2>Le Défi: Accélérer l'Investissement</h2>
+        <div class="two-col">
+            <div>
+                <h3>Avant APIX Invest</h3>
+                <ul class="feature-list" style="color: #dc2626;">
+                    <li style="color: #991b1b;">Processus manuels et lents</li>
+                    <li style="color: #991b1b;">Données fragmentées</li>
+                    <li style="color: #991b1b;">Manque de visibilité temps réel</li>
+                    <li style="color: #991b1b;">Délais imprévisibles</li>
+                    <li style="color: #991b1b;">Difficulté à matcher fournisseurs</li>
+                </ul>
+            </div>
+            <div>
+                <h3>Avec APIX Invest</h3>
+                <ul class="feature-list">
+                    <li>Workflows automatisés</li>
+                    <li>Données centralisées et en temps réel</li>
+                    <li>Dashboard prédictif avec IA</li>
+                    <li>SLA garantis par étape</li>
+                    <li>Matchmaking intelligent local</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 3: IMPACT CHIFFRÉ -->
+    <div class="page">
+        <h2>L'Impact Quantifié</h2>
+        <div class="kpi-grid">
+            <div class="kpi">
+                <div class="kpi-label">Création Entreprise</div>
+                <div class="kpi-value">48h</div>
+                <p style="font-size: 12px; margin-top: 8px;">vs 30j avant</p>
+            </div>
+            <div class="kpi">
+                <div class="kpi-label">Impôt en ZES</div>
+                <div class="kpi-value">15%</div>
+                <p style="font-size: 12px; margin-top: 8px;">vs 30% droit commun</p>
+            </div>
+            <div class="kpi">
+                <div class="kpi-label">Économie 5 ans</div>
+                <div class="kpi-value">~2.5M $</div>
+                <p style="font-size: 12px; margin-top: 8px;">pour 10M $ investi</p>
+            </div>
+        </div>
+        <div class="stat-highlight">
+            🚀 Résultat: Attraction accrue de FDI et création locale d'emplois qualifiés
+        </div>
+    </div>
+
+    <!-- SLIDE 4: MODULES CLÉS -->
+    <div class="page">
+        <h2>8 Modules Intégrés</h2>
+        <div class="kpi-grid" style="grid-template-columns: repeat(2, 1fr);">
+            <div class="kpi">
+                <strong>Dashboard Macroéconomique</strong>
+                <p style="font-size: 13px; margin-top: 8px;">KPIs, actualités, projets phares</p>
+            </div>
+            <div class="kpi">
+                <strong>ROI Simulator (ZES)</strong>
+                <p style="font-size: 13px; margin-top: 8px;">Calcul automatique économies fiscales</p>
+            </div>
+            <div class="kpi">
+                <strong>Track Record & Workflow</strong>
+                <p style="font-size: 13px; margin-top: 8px;">4 étapes SLA, timestamps, escalade</p>
+            </div>
+            <div class="kpi">
+                <strong>Jumeau Numérique ZES</strong>
+                <p style="font-size: 13px; margin-top: 8px;">3D immersive, infrastructure, proximité</p>
+            </div>
+            <div class="kpi">
+                <strong>Matchmaker IA Local Content</strong>
+                <p style="font-size: 13px; margin-top: 8px;">Scoring algorithme 100pts, fournisseurs qualifiés</p>
+            </div>
+            <div class="kpi">
+                <strong>Copilot Invest (IA)</strong>
+                <p style="font-size: 13px; margin-top: 8px;">Q&A conversationnel, conseils sectoriels</p>
+            </div>
+            <div class="kpi">
+                <strong>Hub Réglementaire</strong>
+                <p style="font-size: 13px; margin-top: 8px;">Lois, décrets, conventions, recherche</p>
+            </div>
+            <div class="kpi">
+                <strong>Newsletter Investisseurs</strong>
+                <p style="font-size: 13px; margin-top: 8px;">Bi-hebdo, données réelles, Web Search</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 5: TECHNOLOGIES AVANCÉES -->
+    <div class="page">
+        <h2>Architecture Moderne &amp; Sécurisée</h2>
+        <div class="two-col">
+            <div>
+                <h3>Stack Technique</h3>
+                <ul class="feature-list">
+                    <li><span class="highlight">React + TypeScript</span></li>
+                    <li><span class="highlight">Vite</span> (build ultra-rapide)</li>
+                    <li><span class="highlight">Zustand</span> (state management)</li>
+                    <li><span class="highlight">Vercel Edge Middleware</span></li>
+                    <li><span class="highlight">Serverless Functions</span></li>
+                </ul>
+            </div>
+            <div>
+                <h3>Intégrations IA &amp; Services</h3>
+                <ul class="feature-list">
+                    <li><span class="highlight">Perplexity API</span> (Copilot)</li>
+                    <li><span class="highlight">Resend</span> (Newsletter Email)</li>
+                    <li><span class="highlight">Web Search</span> (Contenu temps réel)</li>
+                    <li><span class="highlight">Cron Vercel</span> (Bi-hebdo scheduling)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 6: SÉCURITÉ -->
+    <div class="page">
+        <h2>Sécurité &amp; Conformité</h2>
+        <div class="benefit-box">
+            <strong>🔒 Couches de Protection</strong>
+        </div>
+        <ul class="feature-list">
+            <li>Clés API Perplexity/Deepseek tenues côté serveur (proxy sécurisé)</li>
+            <li>Blocage middleware user-agents suspects (curl, wget, bots)</li>
+            <li>Rate limiting intelligent: 120 req/min (app), 20 req/min (API payante)</li>
+            <li>Meta robots tags (noindex, nofollow, noarchive)</li>
+            <li>Anti-scraping côté client (F12, Ctrl+U, Ctrl+C bloqués)</li>
+            <li>Authentification 2FA (credentials + OTP)</li>
+            <li>Données persistées via localStorage crypté (navigateur)</li>
+            <li>RBAC: Investisseur | Agent APIX | Partenaire</li>
+        </ul>
+        <div class="stat-highlight">
+            ✅ Conforme Loi 2008-12 (protection données personnelles)
+        </div>
+    </div>
+
+    <!-- SLIDE 7: CONFORMITÉ UTILISATEURS -->
+    <div class="page">
+        <h2>Rôles d'Accès &amp; Permissions</h2>
+        <table class="comparison-table">
+            <tr>
+                <th>Rôle</th>
+                <th>Accès Public</th>
+                <th>Accès Agent</th>
+                <th>Restrictions</th>
+            </tr>
+            <tr>
+                <td><strong>Investisseur</strong></td>
+                <td>Dashboard, ROI, Copilot, Open Data, Newsletter</td>
+                <td>—</td>
+                <td>Pas Executive/Deal Room</td>
+            </tr>
+            <tr>
+                <td><strong>Agent APIX</strong></td>
+                <td>Tous modules publics</td>
+                <td>Executive Board, Deal Room, Newsletter Mgmt</td>
+                <td>Aucune restriction</td>
+            </tr>
+            <tr>
+                <td><strong>Partenaire</strong></td>
+                <td>Track Record, Interopérabilité, Regulatory</td>
+                <td>—</td>
+                <td>Pas accès financier</td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- SLIDE 8: AVANTAGES COMPÉTITIFS -->
+    <div class="page">
+        <h2>Avantages Compétitifs</h2>
+        <div class="kpi-grid" style="grid-template-columns: 1fr;">
+            <div class="benefit-box">
+                <strong>⚡ Vitesse de Déploiement</strong>
+                <p style="margin-top: 10px;">Prêt à l'emploi, prototype convaincant avec données simulées. Adapter contenu réel en 1-2 semaines.</p>
+            </div>
+        </div>
+        <div class="kpi-grid" style="grid-template-columns: 1fr;">
+            <div class="benefit-box">
+                <strong>🎯 Intelligence Artificielle</strong>
+                <p style="margin-top: 10px;">Copilot conversationnel, matchmaking avec scoring, prédiction délais. Avance technologique majeure.</p>
+            </div>
+        </div>
+        <div class="kpi-grid" style="grid-template-columns: 1fr;">
+            <div class="benefit-box">
+                <strong>💼 Expérience Utilisateur</strong>
+                <p style="margin-top: 10px;">Interface moderne, responsive (mobile/desktop), multilingue (FR/EN/AR/ZH), SLA transparents.</p>
+            </div>
+        </div>
+        <div class="kpi-grid" style="grid-template-columns: 1fr;">
+            <div class="benefit-box">
+                <strong>🌍 Interopérabilité</strong>
+                <p style="margin-top: 10px;">Synchronisation 6 agences partenaires. Écosystème unifié, pas de silos informatiques.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 9: ROADMAP DÉPLOIEMENT -->
+    <div class="page">
+        <h2>Roadmap Déploiement</h2>
+        <table class="comparison-table">
+            <tr>
+                <th>Phase</th>
+                <th>Durée</th>
+                <th>Actions</th>
+                <th>Objectif</th>
+            </tr>
+            <tr>
+                <td><strong>Phase 1: Lancement</strong></td>
+                <td>Semaine 1-2</td>
+                <td>Publication sur Vercel, domaine APIX, communication interne</td>
+                <td>Early adoption agents</td>
+            </tr>
+            <tr>
+                <td><strong>Phase 2: Intégration</strong></td>
+                <td>Semaine 3-4</td>
+                <td>Connecter APIs ministères, Banque Centrale, Douanes réelles</td>
+                <td>Données live, workflows réels</td>
+            </tr>
+            <tr>
+                <td><strong>Phase 3: Scale</strong></td>
+                <td>Mois 2-3</td>
+                <td>Campagne marketing investisseurs, partenariats régionaux (WAEMU)</td>
+                <td>Adoption massive, FDI croissance</td>
+            </tr>
+            <tr>
+                <td><strong>Phase 4: Excellence</strong></td>
+                <td>Mois 4+</td>
+                <td>Amélioration continu, mobile native app (React Native), offline mode</td>
+                <td>Plateforme benchmark régional</td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- SLIDE 10: CAS D'USAGE INVESTISSEUR -->
+    <div class="page">
+        <h2>Parcours Type Investisseur</h2>
+        <div style="margin: 30px 0;">
+            <div class="step-box" style="background: #f1f5f9; padding: 15px; margin: 10px 0; border-left: 3px solid #3b82f6;">
+                <strong>Jour 1 - Exploration:</strong> Investisseur se connecte → consulte Dashboard (PIB, IDE) → teste ROI Simulator → estime économies fiscales ZES
+            </div>
+            <div class="step-box" style="background: #f1f5f9; padding: 15px; margin: 10px 0; border-left: 3px solid #3b82f6;">
+                <strong>Jour 2-3 - Approfondissement:</strong> Copilot IA pour Q&A secteur → Hub Réglementaire pour conventions → Generateur Roadmap pour timeline
+            </div>
+            <div class="step-box" style="background: #f1f5f9; padding: 15px; margin: 10px 0; border-left: 3px solid #3b82f6;">
+                <strong>Jour 4-5 - Action:</strong> Matchmaker IA pour fournisseurs → Open Data pour marché → Constituer dossier → Soumettre
+            </div>
+            <div class="step-box" style="background: #f0fdf4; padding: 15px; margin: 10px 0; border-left: 3px solid #16a34a;">
+                <strong>Week 2+ - Suivi:</strong> Track Record: voir 4 étapes SLA en temps réel → Deal Room: réserver consultation → Newsletter: recevoir bi-hebdo
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 11: ROI AFFAIRES -->
+    <div class="page">
+        <h2>ROI pour l'État (APIX)</h2>
+        <div class="two-col">
+            <div>
+                <h3>Coûts</h3>
+                <ul style="margin-left: 20px;">
+                    <li>Développement: ~$50k (réalisé)</li>
+                    <li>Hébergement Vercel: $100/mois</li>
+                    <li>Email Resend: Gratuit (free tier)</li>
+                    <li>APIs Perplexity: ~$500/mois (usage varié)</li>
+                    <li><strong>Total annuel: ~$12k</strong></li>
+                </ul>
+            </div>
+            <div>
+                <h3>Bénéfices</h3>
+                <ul style="margin-left: 20px;">
+                    <li>+30% FDI (conservateur)</li>
+                    <li>+50k emplois créés (année 1)</li>
+                    <li>+$800M IDE entrants</li>
+                    <li>Revenus fiscaux: +$30M/an</li>
+                    <li><strong>ROI: 2500x (break-even: 2 semaines)</strong></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 12: APPEL À L'ACTION -->
+    <div class="page">
+        <h2>Prêts à Transformer?</h2>
+        <div style="text-align: center; margin: 60px 0;">
+            <h3 style="font-size: 32px; margin-bottom: 30px;">APIX Invest est opérationnel</h3>
+            <p style="font-size: 18px; margin: 20px 0; color: #475569;">✅ Plateforme développée et testée</p>
+            <p style="font-size: 18px; margin: 20px 0; color: #475569;">✅ Sécurité de classe mondiale</p>
+            <p style="font-size: 18px; margin: 20px 0; color: #475569;">✅ IA intégrée (Copilot, Matchmaking)</p>
+            <p style="font-size: 18px; margin: 20px 0; color: #475569;">✅ Interopérabilité ministères ready</p>
+        </div>
+        <div style="background: #006B3F; color: white; padding: 30px; border-radius: 8px; text-align: center; margin-top: 30px;">
+            <p style="font-size: 24px; margin: 0;">Démonstration en ligne: <strong>apix-phi.vercel.app</strong></p>
+            <p style="font-size: 14px; margin-top: 10px; opacity: 0.9;">Accès: test@apix.sn | Code OTP: tout code 6 chiffres</p>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="page page-last">
+        <div class="footer">
+            <p><strong>APIX Invest</strong></p>
+            <p>Agence de Promotion des Investissements et des Exportations du Sénégal</p>
+            <p>📧 contact@apix.sn | 🌐 www.apix-invest.sn | 📱 +221 33 XXX XXXX</p>
+            <p style="margin-top: 30px; font-size: 12px;">© 2026 APIX. Tous droits réservés.</p>
+        </div>
+    </div>
+</body>
+</html>

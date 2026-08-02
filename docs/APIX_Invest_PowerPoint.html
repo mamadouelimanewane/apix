@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APIX Invest - Présentation PowerPoint</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { width: 100%; height: 100%; }
+        body {
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #1a1a1a;
+            overflow: hidden;
+        }
+        .slides-container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .slide {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.6s ease-in-out;
+            background: white;
+            overflow: hidden;
+            padding: 60px;
+        }
+        .slide.active {
+            display: flex;
+            opacity: 1;
+            z-index: 10;
+        }
+        .slide-content {
+            max-width: 1000px;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        /* SLIDE 1: COVER */
+        .slide1 {
+            background: linear-gradient(135deg, #006B3F 0%, #004D2E 100%);
+            color: white;
+            text-align: center;
+        }
+        .slide1 .title { font-size: 72px; font-weight: 700; margin-bottom: 20px; }
+        .slide1 .subtitle { font-size: 32px; margin-bottom: 40px; opacity: 0.9; }
+        .slide1 .tagline { font-size: 20px; margin-top: 60px; opacity: 0.8; }
+        /* SLIDE 2 */
+        .slide2 { background: white; }
+        .slide2 h1 { color: #006B3F; font-size: 48px; margin-bottom: 40px; }
+        .slide2 .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+        .slide2 .box {
+            padding: 30px;
+            border-radius: 8px;
+            border-left: 4px solid #006B3F;
+        }
+        .slide2 .box.problem { background: #fef2f2; border-left-color: #dc2626; }
+        .slide2 .box.solution { background: #f0fdf4; border-left-color: #16a34a; }
+        .slide2 .box h3 { font-size: 24px; margin-bottom: 20px; }
+        .slide2 .box ul { margin-left: 20px; }
+        .slide2 .box li { margin: 12px 0; font-size: 16px; }
+        /* SLIDE 3: KPI */
+        .slide3 { background: white; }
+        .slide3 h1 { color: #006B3F; font-size: 48px; margin-bottom: 60px; text-align: center; }
+        .slide3 .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        .slide3 .kpi-card {
+            background: linear-gradient(135deg, #006B3F 0%, #004D2E 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+        }
+        .slide3 .kpi-value { font-size: 56px; font-weight: 700; margin: 20px 0; }
+        .slide3 .kpi-label { font-size: 16px; opacity: 0.9; }
+        /* SLIDE 4: MODULES */
+        .slide4 { background: white; }
+        .slide4 h1 { color: #006B3F; font-size: 48px; margin-bottom: 40px; }
+        .slide4 .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        .slide4 .module {
+            background: #f8fafc;
+            border-left: 4px solid #006B3F;
+            padding: 20px;
+            border-radius: 6px;
+        }
+        .slide4 .module strong { color: #006B3F; font-size: 16px; }
+        .slide4 .module p { font-size: 14px; margin-top: 8px; color: #475569; }
+        /* SLIDE 5: SECURITY */
+        .slide5 { background: white; }
+        .slide5 h1 { color: #006B3F; font-size: 48px; margin-bottom: 40px; }
+        .slide5 .security-icon { font-size: 32px; margin-right: 15px; }
+        .slide5 .feature {
+            display: flex;
+            align-items: flex-start;
+            margin: 20px 0;
+            font-size: 16px;
+        }
+        .slide5 .feature-text { flex: 1; }
+        /* SLIDE 6: ARCHITECTURE */
+        .slide6 { background: white; }
+        .slide6 h1 { color: #006B3F; font-size: 48px; margin-bottom: 40px; }
+        .slide6 .arch-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+        .slide6 .arch-column h3 { color: #006B3F; font-size: 24px; margin-bottom: 20px; }
+        .slide6 .arch-column ul { margin-left: 20px; }
+        .slide6 .arch-column li { margin: 12px 0; font-size: 16px; }
+        /* SLIDE 7: USE CASE */
+        .slide7 { background: white; }
+        .slide7 h1 { color: #006B3F; font-size: 48px; margin-bottom: 40px; }
+        .slide7 .timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .slide7 .timeline-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .slide7 .timeline-dot {
+            width: 24px;
+            height: 24px;
+            background: #006B3F;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        .slide7 .timeline-content {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 6px;
+            flex: 1;
+        }
+        .slide7 .timeline-content strong { color: #006B3F; font-size: 16px; }
+        .slide7 .timeline-content p { font-size: 14px; margin-top: 6px; color: #475569; }
+        /* SLIDE 8: ROI */
+        .slide8 { background: white; }
+        .slide8 h1 { color: #006B3F; font-size: 48px; margin-bottom: 40px; }
+        .slide8 .roi-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+        .slide8 .roi-column { padding: 30px; background: #f8fafc; border-radius: 8px; }
+        .slide8 .roi-column h3 { color: #006B3F; font-size: 24px; margin-bottom: 20px; }
+        .slide8 .roi-column ul { margin-left: 20px; }
+        .slide8 .roi-column li { margin: 12px 0; font-size: 16px; }
+        .slide8 .roi-highlight {
+            margin-top: 30px;
+            padding: 20px;
+            background: #fef2f2;
+            border-left: 4px solid #dc2626;
+            border-radius: 4px;
+            font-weight: 600;
+            color: #991b1b;
+            font-size: 18px;
+        }
+        /* SLIDE 9: ROADMAP */
+        .slide9 { background: white; }
+        .slide9 h1 { color: #006B3F; font-size: 48px; margin-bottom: 40px; }
+        .slide9 .roadmap-phases {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        .slide9 .phase {
+            background: #f8fafc;
+            border-left: 4px solid #006B3F;
+            padding: 25px;
+            border-radius: 6px;
+        }
+        .slide9 .phase-number {
+            display: inline-block;
+            background: #006B3F;
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 32px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .slide9 .phase strong { color: #006B3F; font-size: 16px; }
+        .slide9 .phase p { font-size: 14px; margin-top: 8px; color: #475569; }
+        /* SLIDE 10: CTA */
+        .slide10 {
+            background: linear-gradient(135deg, #006B3F 0%, #004D2E 100%);
+            color: white;
+            text-align: center;
+        }
+        .slide10 h1 { font-size: 56px; margin-bottom: 40px; }
+        .slide10 .cta-boxes {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin: 40px 0;
+        }
+        .slide10 .cta-box {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .slide10 .cta-box-icon { font-size: 32px; margin-bottom: 15px; }
+        .slide10 .cta-box strong { display: block; font-size: 18px; }
+        .slide10 .cta-box p { font-size: 14px; margin-top: 8px; opacity: 0.9; }
+        .slide10 .demo-link {
+            margin-top: 60px;
+            font-size: 24px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 8px;
+            border: 2px solid white;
+        }
+        .slide10 .demo-link strong { font-size: 28px; }
+        /* CONTROLS */
+        .controls {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 100;
+        }
+        .controls button {
+            background: #006B3F;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+        .controls button:hover { background: #004D2E; }
+        .slide-counter {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            color: white;
+            font-size: 16px;
+            background: rgba(0, 107, 63, 0.8);
+            padding: 10px 20px;
+            border-radius: 4px;
+            z-index: 100;
+        }
+    </style>
+</head>
+<body>
+    <div class="slides-container">
+        <!-- SLIDE 1: COVER -->
+        <div class="slide slide1 active">
+            <div class="slide-content">
+                <div class="title">APIX INVEST</div>
+                <div class="subtitle">Portail Investisseur Nouvelle Génération</div>
+                <div class="tagline">🚀 Transformer l'écosystème d'investissement au Sénégal</div>
+            </div>
+        </div>
+
+        <!-- SLIDE 2: PROBLÈME VS SOLUTION -->
+        <div class="slide slide2">
+            <div class="slide-content">
+                <h1>Le Défi & La Solution</h1>
+                <div class="content-grid">
+                    <div class="box problem">
+                        <h3>🔴 Avant APIX Invest</h3>
+                        <ul>
+                            <li>Processus manuels</li>
+                            <li>Données fragmentées</li>
+                            <li>Pas de visibilité temps réel</li>
+                            <li>Délais imprévisibles</li>
+                            <li>Matching difficile</li>
+                        </ul>
+                    </div>
+                    <div class="box solution">
+                        <h3>🟢 Avec APIX Invest</h3>
+                        <ul>
+                            <li>Workflows automatisés</li>
+                            <li>Données centralisées</li>
+                            <li>Dashboard prédictif</li>
+                            <li>SLA garantis</li>
+                            <li>Matchmaking IA</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 3: IMPACT CHIFFRÉ -->
+        <div class="slide slide3">
+            <div class="slide-content">
+                <h1>L'Impact Quantifié</h1>
+                <div class="kpi-grid">
+                    <div class="kpi-card">
+                        <div class="kpi-label">⏱️ Création Entreprise</div>
+                        <div class="kpi-value">48h</div>
+                        <div style="font-size: 14px; opacity: 0.8;">vs 30 jours avant</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-label">💰 Impôt ZES</div>
+                        <div class="kpi-value">15%</div>
+                        <div style="font-size: 14px; opacity: 0.8;">vs 30% droit commun</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-label">📈 Économie 5 ans</div>
+                        <div class="kpi-value">~2.5M$</div>
+                        <div style="font-size: 14px; opacity: 0.8;">pour 10M$ investi</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 4: 8 MODULES -->
+        <div class="slide slide4">
+            <div class="slide-content">
+                <h1>8 Modules Intégrés</h1>
+                <div class="modules-grid">
+                    <div class="module">
+                        <strong>📊 Dashboard Macro</strong>
+                        <p>KPIs, actualités, projets phares</p>
+                    </div>
+                    <div class="module">
+                        <strong>💹 ROI Simulator</strong>
+                        <p>Calcul auto économies fiscales</p>
+                    </div>
+                    <div class="module">
+                        <strong>📋 Track Record</strong>
+                        <p>4 étapes SLA, timestamps</p>
+                    </div>
+                    <div class="module">
+                        <strong>🗺️ Jumeau Numérique</strong>
+                        <p>Visualisation 3D ZES</p>
+                    </div>
+                    <div class="module">
+                        <strong>🤖 Matchmaker IA</strong>
+                        <p>Scoring 100pts, fournisseurs</p>
+                    </div>
+                    <div class="module">
+                        <strong>💬 Copilot Invest</strong>
+                        <p>Q&A conversationnel IA</p>
+                    </div>
+                    <div class="module">
+                        <strong>⚖️ Hub Réglementaire</strong>
+                        <p>Lois, décrets, conventions</p>
+                    </div>
+                    <div class="module">
+                        <strong>📧 Newsletter</strong>
+                        <p>Bi-hebdo, contenu temps réel</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 5: SÉCURITÉ -->
+        <div class="slide slide5">
+            <div class="slide-content">
+                <h1>🔒 Sécurité &amp; Conformité</h1>
+                <div class="feature">
+                    <span class="security-icon">🔐</span>
+                    <div class="feature-text">
+                        <strong>Clés API sécurisées</strong><br>
+                        <small>Perplexity/Deepseek côté serveur (proxy Vercel)</small>
+                    </div>
+                </div>
+                <div class="feature">
+                    <span class="security-icon">🚫</span>
+                    <div class="feature-text">
+                        <strong>Blocage bots &amp; scrapers</strong><br>
+                        <small>Middleware user-agents, rate limiting intelligent</small>
+                    </div>
+                </div>
+                <div class="feature">
+                    <span class="security-icon">🔍</span>
+                    <div class="feature-text">
+                        <strong>Anti-scraping multi-couche</strong><br>
+                        <small>Meta tags (robots.txt), blocage client (F12, Ctrl+U)</small>
+                    </div>
+                </div>
+                <div class="feature">
+                    <span class="security-icon">✅</span>
+                    <div class="feature-text">
+                        <strong>Authentification 2FA</strong><br>
+                        <small>Credentials + OTP, RBAC (Investisseur | Agent | Partenaire)</small>
+                    </div>
+                </div>
+                <div class="feature">
+                    <span class="security-icon">⚖️</span>
+                    <div class="feature-text">
+                        <strong>Conforme Loi 2008-12</strong><br>
+                        <small>Protection données personnelles Sénégal</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 6: ARCHITECTURE -->
+        <div class="slide slide6">
+            <div class="slide-content">
+                <h1>Architecture Moderne</h1>
+                <div class="arch-grid">
+                    <div class="arch-column">
+                        <h3>🛠️ Stack Technique</h3>
+                        <ul>
+                            <li>React + TypeScript</li>
+                            <li>Vite (ultra-rapide)</li>
+                            <li>Zustand (state)</li>
+                            <li>Vercel Edge Middleware</li>
+                            <li>Serverless Functions</li>
+                        </ul>
+                    </div>
+                    <div class="arch-column">
+                        <h3>🤖 IA &amp; Intégrations</h3>
+                        <ul>
+                            <li>Perplexity API (Copilot)</li>
+                            <li>Resend (Email Newsletter)</li>
+                            <li>Web Search (temps réel)</li>
+                            <li>Cron Vercel (scheduling)</li>
+                            <li>localStorage (persistence)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 7: CAS D'USAGE -->
+        <div class="slide slide7">
+            <div class="slide-content">
+                <h1>Parcours Type Investisseur</h1>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <strong>Jour 1 - Exploration</strong>
+                            <p>Dashboard → ROI Simulator → estimer économies fiscales</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <strong>Jour 2-3 - Approfondissement</strong>
+                            <p>Copilot IA → Hub Réglementaire → Roadmap Generator</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <strong>Jour 4-5 - Action</strong>
+                            <p>Matchmaker → Open Data → Constituer &amp; Soumettre dossier</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <strong>Week 2+ - Suivi</strong>
+                            <p>Track Record → Deal Room → Newsletter bi-hebdo</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 8: ROI AFFAIRES -->
+        <div class="slide slide8">
+            <div class="slide-content">
+                <h1>ROI pour l'État (APIX)</h1>
+                <div class="roi-grid">
+                    <div class="roi-column">
+                        <h3>💵 Coûts Annuels</h3>
+                        <ul>
+                            <li>Dev: $50k (réalisé)</li>
+                            <li>Vercel: $100/mois</li>
+                            <li>Resend: Gratuit</li>
+                            <li>APIs: ~$500/mois</li>
+                            <li style="font-weight: 700; color: #006B3F; margin-top: 15px;">Total: ~$12k/an</li>
+                        </ul>
+                    </div>
+                    <div class="roi-column">
+                        <h3>💰 Bénéfices Annuels</h3>
+                        <ul>
+                            <li>+30% FDI (conservative)</li>
+                            <li>+50k emplois année 1</li>
+                            <li>+$800M IDE entrants</li>
+                            <li>Revenus fiscaux: +$30M</li>
+                            <li style="font-weight: 700; color: #006B3F; margin-top: 15px;">ROI: 2500x</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="roi-highlight">
+                    ⚡ Break-even en 2 semaines | Profit après: illimité
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 9: ROADMAP -->
+        <div class="slide slide9">
+            <div class="slide-content">
+                <h1>Roadmap Déploiement</h1>
+                <div class="roadmap-phases">
+                    <div class="phase">
+                        <div class="phase-number">1</div>
+                        <strong>Lancement (Sem 1-2)</strong>
+                        <p>Publication, domaine APIX, early adoption agents</p>
+                    </div>
+                    <div class="phase">
+                        <div class="phase-number">2</div>
+                        <strong>Intégration (Sem 3-4)</strong>
+                        <p>APIs ministères, Banque Centrale, Douanes réelles</p>
+                    </div>
+                    <div class="phase">
+                        <div class="phase-number">3</div>
+                        <strong>Scale (Mois 2-3)</strong>
+                        <p>Marketing investisseurs, partenariats régionaux WAEMU</p>
+                    </div>
+                    <div class="phase">
+                        <div class="phase-number">4</div>
+                        <strong>Excellence (Mois 4+)</strong>
+                        <p>Mobile native, offline mode, amélioration continue</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 10: CTA -->
+        <div class="slide slide10">
+            <div class="slide-content">
+                <h1>Prêts à Transformer?</h1>
+                <div class="cta-boxes">
+                    <div class="cta-box">
+                        <div class="cta-box-icon">✅</div>
+                        <strong>Plateforme Opérationnelle</strong>
+                        <p>Développée &amp; testée</p>
+                    </div>
+                    <div class="cta-box">
+                        <div class="cta-box-icon">🔒</div>
+                        <strong>Sécurité Mondiale</strong>
+                        <p>Classe mondiale</p>
+                    </div>
+                    <div class="cta-box">
+                        <div class="cta-box-icon">🤖</div>
+                        <strong>IA Intégrée</strong>
+                        <p>Copilot &amp; Matchmaking</p>
+                    </div>
+                </div>
+                <div class="demo-link">
+                    🌐 Démo: <strong>apix-phi.vercel.app</strong><br>
+                    <small>Email: test@apix.sn | OTP: tout code 6 chiffres</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE COUNTER -->
+    <div class="slide-counter">
+        <span id="current-slide">1</span> / <span id="total-slides">10</span>
+    </div>
+
+    <!-- CONTROLS -->
+    <div class="controls">
+        <button onclick="prevSlide()">← Précédent</button>
+        <button onclick="nextSlide()">Suivant →</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        document.getElementById('total-slides').textContent = totalSlides;
+
+        function showSlide(n) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            slides[n].classList.add('active');
+            document.getElementById('current-slide').textContent = n + 1;
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            showSlide(currentSlide);
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            showSlide(currentSlide);
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') nextSlide();
+            if (e.key === 'ArrowLeft') prevSlide();
+        });
+
+        showSlide(0);
+    </script>
+</body>
+</html>
