@@ -1,5 +1,12 @@
 import React from 'react';
-import { Briefcase, Cpu, Leaf, Plane, Droplets, Download, ChevronRight, FileText } from 'lucide-react';
+import { Briefcase, Cpu, Leaf, Plane, Droplets, Download, ChevronRight, FileText, Sprout } from 'lucide-react';
+
+const esgGrade = (total) => {
+  if (total >= 80) return { letter: 'A', color: 'var(--accent-primary)' };
+  if (total >= 65) return { letter: 'B', color: '#65a30d' };
+  if (total >= 50) return { letter: 'C', color: '#b39500' };
+  return { letter: 'D', color: 'var(--accent-secondary)' };
+};
 
 const SectorOpportunities = () => {
   const sectors = [
@@ -11,7 +18,8 @@ const SectorOpportunities = () => {
       bg: 'rgba(30, 58, 138, 0.1)',
       desc: 'Parc des Technologies Numériques (PTN) de Diamniadio. Hub régional de l\'innovation.',
       incentives: ['Exonération TVA sur équipements', 'Subvention formation'],
-      deckUrl: '#'
+      deckUrl: '#',
+      esg: { environmental: 72, social: 85, governance: 90 }
     },
     {
       id: 2,
@@ -21,7 +29,8 @@ const SectorOpportunities = () => {
       bg: 'rgba(0, 150, 57, 0.1)',
       desc: 'Souveraineté alimentaire et export. ZES de Sandiara et Agropoles.',
       incentives: ['ZES - Impôt sur les sociétés à 15%', 'Droits de douane suspendus'],
-      deckUrl: '#'
+      deckUrl: '#',
+      esg: { environmental: 58, social: 80, governance: 75 }
     },
     {
       id: 3,
@@ -31,7 +40,8 @@ const SectorOpportunities = () => {
       bg: 'rgba(252, 209, 22, 0.1)',
       desc: 'Contenu local et sous-traitance pour les premiers barils. Opportunités logistiques.',
       incentives: ['Cadre légal sécurisé', 'Préférence nationale (Local Content)'],
-      deckUrl: '#'
+      deckUrl: '#',
+      esg: { environmental: 35, social: 60, governance: 70 }
     },
     {
       id: 4,
@@ -41,7 +51,8 @@ const SectorOpportunities = () => {
       bg: 'rgba(227, 27, 35, 0.1)',
       desc: 'Pôle touristique de Pointe Sarène et Mbour. Tourisme d\'affaires (MICE) à Dakar.',
       incentives: ['Abattements fiscaux sur 10 ans', 'Foncier aménagé'],
-      deckUrl: '#'
+      deckUrl: '#',
+      esg: { environmental: 65, social: 78, governance: 72 }
     }
   ];
 
@@ -105,7 +116,40 @@ const SectorOpportunities = () => {
                 {sector.incentives.map((inc, i) => <li key={i} style={{ marginBottom: '4px' }}>{inc}</li>)}
               </ul>
             </div>
-            
+
+            {(() => {
+              const { environmental, social, governance } = sector.esg;
+              const total = Math.round((environmental + social + governance) / 3);
+              const grade = esgGrade(total);
+              const bars = [
+                { label: 'Environnement', value: environmental },
+                { label: 'Social', value: social },
+                { label: 'Gouvernance', value: governance }
+              ];
+              return (
+                <div style={{ marginBottom: '1.5rem', background: 'var(--bg-primary)', padding: '1rem', borderRadius: '12px' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+                    <h4 style={{ fontSize: '0.85rem', textTransform: 'uppercase', color: 'var(--text-muted)', margin: 0, display: 'flex', alignItems: 'center', gap: '6px' }}>
+                      <Sprout size={14} /> Score ESG
+                    </h4>
+                    <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '28px', height: '28px', borderRadius: '50%', background: grade.color, color: 'white', fontWeight: 'bold', fontSize: '0.85rem' }}>
+                      {grade.letter}
+                    </span>
+                  </div>
+                  {bars.map(bar => (
+                    <div key={bar.label} style={{ marginBottom: '6px' }}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.75rem', color: 'var(--text-secondary)', marginBottom: '2px' }}>
+                        <span>{bar.label}</span><span>{bar.value}/100</span>
+                      </div>
+                      <div style={{ height: '5px', background: 'rgba(0,0,0,0.08)', borderRadius: '3px', overflow: 'hidden' }}>
+                        <div style={{ width: `${bar.value}%`, height: '100%', background: sector.color }} />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              );
+            })()}
+
             <button className="btn-secondary" style={{ width: '100%', justifyContent: 'center' }}>
               <Download size={16} /> Télécharger le Pitch Deck
             </button>

@@ -1,19 +1,40 @@
 import React, { useState } from 'react';
-import { Lock, ArrowRight, ShieldCheck, Globe } from 'lucide-react';
+import { Lock, ArrowRight, ShieldCheck, Globe, KeyRound } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
+import { useAuth, ROLES } from '../context/AuthContext';
 
-const Login = ({ onLogin }) => {
+const Login = () => {
+  const [step, setStep] = useState('credentials'); // 'credentials' | 'otp'
   const [isLoading, setIsLoading] = useState(false);
   const [email, setEmail] = useState('');
+  const [role, setRole] = useState('investisseur');
+  const [otp, setOtp] = useState('');
+  const [otpError, setOtpError] = useState('');
   const { t } = useLanguage();
+  const { login } = useAuth();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsLoading(true);
-    // Simulation d'authentification et chargement sécurisé
+    // Simulation d'envoi d'un code de vérification (MFA) par email
     setTimeout(() => {
-      onLogin();
-    }, 1500);
+      setIsLoading(false);
+      setStep('otp');
+    }, 1200);
+  };
+
+  const handleVerifyOtp = (e) => {
+    e.preventDefault();
+    if (otp.trim().length !== 6) {
+      setOtpError('Le code doit contenir 6 chiffres.');
+      return;
+    }
+    setOtpError('');
+    setIsLoading(true);
+    // Simulation de vérification MFA (tout code à 6 chiffres est accepté en mode démo)
+    setTimeout(() => {
+      login(email, role);
+    }, 1000);
   };
 
   return (
@@ -85,83 +106,169 @@ const Login = ({ onLogin }) => {
             <p style={{ color: '#94a3b8', margin: 0 }}>{t('login.login_desc')}</p>
           </div>
 
-          <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-            <div>
-              <label style={{ display: 'block', marginBottom: '8px', color: '#cbd5e1', fontSize: '0.9rem', fontWeight: '500' }}>{t('login.email_label')}</label>
-              <input 
-                type="email" 
-                required
-                value={email}
-                onChange={e => setEmail(e.target.value)}
-                placeholder={t('login.email_placeholder')}
-                style={{
-                  width: '100%',
-                  padding: '14px 16px',
-                  borderRadius: '8px',
-                  border: '1px solid #334155',
-                  background: '#1e293b',
-                  color: 'white',
-                  fontSize: '1rem',
-                  outline: 'none',
-                  transition: 'border 0.2s'
-                }}
-                onFocus={e => e.target.style.borderColor = 'var(--brand-blue-light)'}
-                onBlur={e => e.target.style.borderColor = '#334155'}
-              />
-            </div>
-            <div>
-              <label style={{ display: 'block', marginBottom: '8px', color: '#cbd5e1', fontSize: '0.9rem', fontWeight: '500' }}>{t('login.pwd_label')}</label>
-              <input 
-                type="password" 
-                required
-                placeholder={t('login.pwd_placeholder')}
-                style={{
-                  width: '100%',
-                  padding: '14px 16px',
-                  borderRadius: '8px',
-                  border: '1px solid #334155',
-                  background: '#1e293b',
-                  color: 'white',
-                  fontSize: '1rem',
-                  outline: 'none',
-                  transition: 'border 0.2s'
-                }}
-                onFocus={e => e.target.style.borderColor = 'var(--brand-blue-light)'}
-                onBlur={e => e.target.style.borderColor = '#334155'}
-              />
-            </div>
+          {step === 'credentials' ? (
+            <form key="credentials-form" onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+              <div>
+                <label style={{ display: 'block', marginBottom: '8px', color: '#cbd5e1', fontSize: '0.9rem', fontWeight: '500' }}>{t('login.email_label')}</label>
+                <input
+                  type="email"
+                  required
+                  value={email}
+                  onChange={e => setEmail(e.target.value)}
+                  placeholder={t('login.email_placeholder')}
+                  style={{
+                    width: '100%',
+                    padding: '14px 16px',
+                    borderRadius: '8px',
+                    border: '1px solid #334155',
+                    background: '#1e293b',
+                    color: 'white',
+                    fontSize: '1rem',
+                    outline: 'none',
+                    transition: 'border 0.2s'
+                  }}
+                  onFocus={e => e.target.style.borderColor = 'var(--brand-blue-light)'}
+                  onBlur={e => e.target.style.borderColor = '#334155'}
+                />
+              </div>
+              <div>
+                <label style={{ display: 'block', marginBottom: '8px', color: '#cbd5e1', fontSize: '0.9rem', fontWeight: '500' }}>{t('login.pwd_label')}</label>
+                <input
+                  type="password"
+                  required
+                  placeholder={t('login.pwd_placeholder')}
+                  style={{
+                    width: '100%',
+                    padding: '14px 16px',
+                    borderRadius: '8px',
+                    border: '1px solid #334155',
+                    background: '#1e293b',
+                    color: 'white',
+                    fontSize: '1rem',
+                    outline: 'none',
+                    transition: 'border 0.2s'
+                  }}
+                  onFocus={e => e.target.style.borderColor = 'var(--brand-blue-light)'}
+                  onBlur={e => e.target.style.borderColor = '#334155'}
+                />
+              </div>
+              <div>
+                <label style={{ display: 'block', marginBottom: '8px', color: '#cbd5e1', fontSize: '0.9rem', fontWeight: '500' }}>Profil d'accès</label>
+                <select
+                  value={role}
+                  onChange={e => setRole(e.target.value)}
+                  style={{
+                    width: '100%',
+                    padding: '14px 16px',
+                    borderRadius: '8px',
+                    border: '1px solid #334155',
+                    background: '#1e293b',
+                    color: 'white',
+                    fontSize: '1rem',
+                    outline: 'none'
+                  }}
+                >
+                  {Object.entries(ROLES).map(([key, r]) => (
+                    <option key={key} value={key}>{r.label}</option>
+                  ))}
+                </select>
+              </div>
 
-            <button 
-              type="submit" 
-              disabled={isLoading}
-              style={{
-                background: isLoading ? '#334155' : 'var(--brand-blue)',
-                color: 'white',
-                border: 'none',
-                padding: '16px',
-                borderRadius: '8px',
-                fontSize: '1.05rem',
-                fontWeight: 'bold',
-                cursor: isLoading ? 'not-allowed' : 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: '10px',
-                marginTop: '1rem',
-                transition: 'background 0.2s'
-              }}
-            >
-              {isLoading ? (
-                <>
-                  <Lock size={20} /> {t('login.btn_loading')}
-                </>
-              ) : (
-                <>
-                  {t('login.btn_submit')} <ArrowRight size={20} />
-                </>
-              )}
-            </button>
-          </form>
+              <button
+                type="submit"
+                disabled={isLoading}
+                style={{
+                  background: isLoading ? '#334155' : 'var(--brand-blue)',
+                  color: 'white',
+                  border: 'none',
+                  padding: '16px',
+                  borderRadius: '8px',
+                  fontSize: '1.05rem',
+                  fontWeight: 'bold',
+                  cursor: isLoading ? 'not-allowed' : 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '10px',
+                  marginTop: '1rem',
+                  transition: 'background 0.2s'
+                }}
+              >
+                {isLoading ? (
+                  <>
+                    <Lock size={20} /> {t('login.btn_loading')}
+                  </>
+                ) : (
+                  <>
+                    {t('login.btn_submit')} <ArrowRight size={20} />
+                  </>
+                )}
+              </button>
+            </form>
+          ) : (
+            <form key="otp-form" onSubmit={handleVerifyOtp} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+              <div style={{ background: 'rgba(0, 150, 57, 0.1)', border: '1px solid rgba(0, 150, 57, 0.3)', borderRadius: '8px', padding: '1rem', display: 'flex', gap: '10px', alignItems: 'flex-start' }}>
+                <KeyRound size={20} color="var(--brand-blue-light)" style={{ flexShrink: 0, marginTop: '2px' }} />
+                <p style={{ margin: 0, fontSize: '0.85rem', color: '#cbd5e1' }}>
+                  Un code de vérification à 6 chiffres a été envoyé à <strong>{email}</strong> (authentification à deux facteurs).
+                </p>
+              </div>
+              <div>
+                <label style={{ display: 'block', marginBottom: '8px', color: '#cbd5e1', fontSize: '0.9rem', fontWeight: '500' }}>Code de vérification</label>
+                <input
+                  type="text"
+                  inputMode="numeric"
+                  maxLength={6}
+                  required
+                  value={otp}
+                  onChange={e => setOtp(e.target.value.replace(/\D/g, ''))}
+                  placeholder="000000"
+                  style={{
+                    width: '100%',
+                    padding: '14px 16px',
+                    borderRadius: '8px',
+                    border: otpError ? '1px solid var(--accent-secondary)' : '1px solid #334155',
+                    background: '#1e293b',
+                    color: 'white',
+                    fontSize: '1.4rem',
+                    letterSpacing: '0.5rem',
+                    textAlign: 'center',
+                    outline: 'none'
+                  }}
+                />
+                {otpError && <p style={{ color: 'var(--accent-secondary)', fontSize: '0.8rem', marginTop: '8px' }}>{otpError}</p>}
+              </div>
+
+              <button
+                type="submit"
+                disabled={isLoading}
+                style={{
+                  background: isLoading ? '#334155' : 'var(--brand-blue)',
+                  color: 'white',
+                  border: 'none',
+                  padding: '16px',
+                  borderRadius: '8px',
+                  fontSize: '1.05rem',
+                  fontWeight: 'bold',
+                  cursor: isLoading ? 'not-allowed' : 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '10px',
+                  transition: 'background 0.2s'
+                }}
+              >
+                {isLoading ? 'Vérification...' : <>Valider et accéder <ArrowRight size={20} /></>}
+              </button>
+              <button
+                type="button"
+                onClick={() => setStep('credentials')}
+                style={{ background: 'transparent', color: '#94a3b8', fontSize: '0.85rem', textAlign: 'center' }}
+              >
+                Retour
+              </button>
+            </form>
+          )}
 
           <p style={{ textAlign: 'center', color: '#64748b', fontSize: '0.85rem', marginTop: '2rem' }}>
             {t('login.terms')}

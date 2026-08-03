@@ -3,10 +3,27 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />
+    <meta name="description" content="APIX Invest - Plateforme d'investissement au Sénégal" />
+
+    <!-- Preload critical chunks for faster load -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Preload React vendor chunk (loaded first) -->
+    <link rel="prefetch" href="/assets/react-vendor-*.js" as="script" />
+
     <title>APIX Invest Prototype</title>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+
+    <!-- Minimal loading indicator for better UX during page transitions -->
+    <style>
+      #root.loading { opacity: 0.7; }
+      .page-loading { display: none; }
+      #root.loading .page-loading { display: block; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+    </style>
   </body>
 </html>

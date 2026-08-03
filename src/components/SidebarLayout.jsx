@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
-import { LayoutDashboard, MessageSquare, Map as MapIcon, Calculator, FileText, Users, BookOpen, BarChart3, Landmark, Palmtree, MapPin, Route as RouteIcon, Briefcase, HeadphonesIcon, ShieldCheck, Lock, Layers, Award, Globe, DollarSign, Menu, X } from 'lucide-react';
+import { LayoutDashboard, MessageSquare, Map as MapIcon, Calculator, FileText, Users, BookOpen, BarChart3, Landmark, Palmtree, MapPin, Route as RouteIcon, Briefcase, HeadphonesIcon, ShieldCheck, Lock, Layers, Award, Globe, DollarSign, Menu, X, Network, Database, LogOut, Newspaper } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
+import { useAuth, ROLES } from '../context/AuthContext';
 
 const SidebarLayout = () => {
   const { t, language, setLanguage } = useLanguage();
+  const { email, role, logout } = useAuth();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const location = useLocation();
+  const initials = (email || 'AP').slice(0, 2).toUpperCase();
 
   // Close mobile menu on route change
   useEffect(() => {
@@ -79,6 +83,21 @@ const SidebarLayout = () => {
             <BookOpen size={20} />
             <span>{t('sidebar.hub')}</span>
           </NavLink>
+
+          <NavLink to="/interoperability" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
+            <Network size={20} />
+            <span>{t('sidebar.interoperability')}</span>
+          </NavLink>
+
+          <NavLink to="/open-data" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
+            <Database size={20} />
+            <span>{t('sidebar.open_data')}</span>
+          </NavLink>
+
+          <NavLink to="/newsletter" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
+            <Newspaper size={20} />
+            <span>{t('sidebar.newsletter')}</span>
+          </NavLink>
         </nav>
       </aside>
       <div className="main-content" style={{ padding: 0, display: 'flex', flexDirection: 'column', height: '100vh' }}>
@@ -116,8 +135,22 @@ const SidebarLayout = () => {
               </select>
             </div>
 
-            <div style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'var(--brand-blue)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: 'bold' }}>
-              DG
+            <div style={{ position: 'relative' }}>
+              <div
+                onClick={() => setIsUserMenuOpen(prev => !prev)}
+                style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'var(--brand-blue)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: 'bold', cursor: 'pointer' }}
+              >
+                {initials}
+              </div>
+              {isUserMenuOpen && (
+                <div style={{ position: 'absolute', top: '50px', right: 0, background: 'white', borderRadius: 'var(--radius-md)', boxShadow: 'var(--shadow-lg)', padding: '1rem', width: '240px', zIndex: 200 }}>
+                  <p style={{ fontWeight: 'bold', margin: '0 0 4px 0', fontSize: '0.9rem', color: 'var(--text-primary)' }}>{email}</p>
+                  <p style={{ margin: '0 0 1rem 0', fontSize: '0.8rem', color: 'var(--text-secondary)' }}>{ROLES[role]?.label}</p>
+                  <button onClick={logout} style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--accent-secondary)', fontSize: '0.9rem', fontWeight: '600' }}>
+                    <LogOut size={16} /> Se déconnecter
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         </header>

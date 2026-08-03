@@ -32,7 +32,10 @@
     "matchmaker": "Local Content AI Matchmaker",
     "copilot": "Copilot Invest (AI)",
     "hub": "Regulatory Hub",
-    "roi_simulator": "ROI Simulator (SEZ)"
+    "roi_simulator": "ROI Simulator (SEZ)",
+    "interoperability": "Cross-Agency Interoperability",
+    "open_data": "Open Data Portal",
+    "newsletter": "Investor Newsletter"
   },
   "dashboard": {
     "title": "Macroeconomic Dashboard",

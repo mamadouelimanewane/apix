@@ -9,19 +9,32 @@ const Matchmaking = () => {
 
   // Formulaire IA
   const [projectSector, setProjectSector] = useState('Pétrole & Gaz');
-  const [neededService, setNeededService] = useState('Logistique & BTP');
-  
+  const [neededService, setNeededService] = useState('Logistique & Transport');
+  const [matches, setMatches] = useState([]);
+
   const suppliers = [
-    { id: 1, name: 'Sénégal BTP & Logistique', sector: 'Construction', region: 'Dakar', certified: true, rating: 4.8, description: 'Leader dans la construction d\'infrastructures industrielles et logistiques. Certification ISO 9001.', localContent: 95 },
-    { id: 2, name: 'TechSolutions SN', sector: 'IT & Services', region: 'Diamniadio', certified: true, rating: 4.9, description: 'Services cloud, intégration système et cybersécurité pour les entreprises de la ZES.', localContent: 100 },
-    { id: 3, name: 'EcoEnergy Sénégal', sector: 'Énergie', region: 'Dakar', certified: true, rating: 4.7, description: 'Solutions solaires industrielles et efficacité énergétique.', localContent: 80 },
-    { id: 4, name: 'SenTrans International', sector: 'Logistique', region: 'Thiès', certified: true, rating: 4.5, description: 'Transport routier, fret maritime et gestion d\'entrepôts. Flotte de 200 camions.', localContent: 100 },
+    { id: 1, name: 'Sénégal BTP & Logistique', sector: 'Construction', region: 'Dakar', certified: true, rating: 4.8, description: 'Leader dans la construction d\'infrastructures industrielles et logistiques. Certification ISO 9001.', localContent: 95, services: ['BTP & Génie Civil', 'Logistique & Transport'], sectors: ['Infrastructures', 'Mines', 'Pétrole & Gaz'] },
+    { id: 2, name: 'TechSolutions SN', sector: 'IT & Services', region: 'Diamniadio', certified: true, rating: 4.9, description: 'Services cloud, intégration système et cybersécurité pour les entreprises de la ZES.', localContent: 100, services: ['Services IT & Cybersécurité'], sectors: ['Pétrole & Gaz', 'Mines', 'Agro-industrie', 'Infrastructures'] },
+    { id: 3, name: 'EcoEnergy Sénégal', sector: 'Énergie', region: 'Dakar', certified: true, rating: 4.7, description: 'Solutions solaires industrielles et efficacité énergétique.', localContent: 80, services: ['Énergie & Efficacité'], sectors: ['Agro-industrie', 'Infrastructures'] },
+    { id: 4, name: 'SenTrans International', sector: 'Logistique', region: 'Thiès', certified: true, rating: 4.5, description: 'Transport routier, fret maritime et gestion d\'entrepôts. Flotte de 200 camions.', localContent: 100, services: ['Logistique & Transport', 'Restauration & Base Vie'], sectors: ['Pétrole & Gaz', 'Agro-industrie', 'Mines'] },
   ];
+
+  const computeMatchScore = (supplier) => {
+    const serviceMatch = supplier.services.includes(neededService) ? 45 : 0;
+    const sectorMatch = supplier.sectors.includes(projectSector) ? 25 : 0;
+    const ratingScore = supplier.rating * 4; // jusqu'à 20
+    const localContentScore = supplier.localContent / 10; // jusqu'à 10
+    return Math.round(serviceMatch + sectorMatch + ratingScore + localContentScore);
+  };
 
   const handleAiScan = () => {
     setIsAiScanning(true);
     setShowAiResults(false);
     setTimeout(() => {
+      const ranked = suppliers
+        .map(s => ({ ...s, matchScore: computeMatchScore(s) }))
+        .sort((a, b) => b.matchScore - a.matchScore);
+      setMatches(ranked);
       setIsAiScanning(false);
       setShowAiResults(true);
     }, 2000);
@@ -76,6 +89,7 @@ const Matchmaking = () => {
               <option style={{color: 'black'}}>BTP & Génie Civil</option>
               <option style={{color: 'black'}}>Services IT & Cybersécurité</option>
               <option style={{color: 'black'}}>Restauration & Base Vie</option>
+              <option style={{color: 'black'}}>Énergie & Efficacité</option>
             </select>
           </div>
           <button className="btn-primary" style={{ padding: '12px 24px', background: 'var(--accent-primary)', color: 'white', border: 'none', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer', fontWeight: 'bold' }} onClick={handleAiScan} disabled={isAiScanning}>
@@ -101,19 +115,28 @@ const Matchmaking = () => {
         <>
           <div style={{ marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '10px' }}>
             <h2 style={{ color: 'var(--brand-blue)', margin: 0 }}>Sélection IA pour : {neededService} ({projectSector})</h2>
-            <span style={{ background: 'rgba(0, 150, 57, 0.1)', color: 'var(--accent-primary)', padding: '4px 12px', borderRadius: '20px', fontSize: '0.85rem', fontWeight: 'bold' }}>2 profils validés 100% Contenu Local</span>
+            <span style={{ background: 'rgba(0, 150, 57, 0.1)', color: 'var(--accent-primary)', padding: '4px 12px', borderRadius: '20px', fontSize: '0.85rem', fontWeight: 'bold' }}>{matches.filter(m => m.matchScore >= 40).length} profil(s) fortement recommandé(s)</span>
           </div>
-          
+
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(350px, 1fr))', gap: '1.5rem' }}>
-            {suppliers.slice(0, 2).map(supplier => (
-              <div key={supplier.id} className="card" style={{ display: 'flex', flexDirection: 'column', border: '2px solid var(--accent-primary)' }}>
+            {matches.map(supplier => (
+              <div key={supplier.id} className="card" style={{ display: 'flex', flexDirection: 'column', border: supplier.matchScore >= 40 ? '2px solid var(--accent-primary)' : '1px solid rgba(0,0,0,0.05)' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1rem' }}>
                   <h3 style={{ color: 'var(--brand-blue)', fontSize: '1.2rem', margin: 0 }}>{supplier.name}</h3>
                   <span style={{ display: 'flex', alignItems: 'center', gap: '4px', background: 'var(--brand-blue)', color: 'white', padding: '4px 8px', borderRadius: '4px', fontSize: '0.8rem', fontWeight: 'bold' }}>
                     <ShieldCheck size={14} /> Certifié APIX
                   </span>
                 </div>
-                
+
+                <div style={{ marginBottom: '1rem' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', color: 'var(--text-secondary)', marginBottom: '4px' }}>
+                    <span>Score de correspondance</span><span style={{ fontWeight: 'bold', color: 'var(--brand-blue)' }}>{supplier.matchScore}%</span>
+                  </div>
+                  <div style={{ height: '6px', background: 'rgba(0,0,0,0.08)', borderRadius: '3px', overflow: 'hidden' }}>
+                    <div style={{ width: `${Math.min(supplier.matchScore, 100)}%`, height: '100%', background: 'var(--accent-primary)' }} />
+                  </div>
+                </div>
+
                 <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', marginBottom: '1.5rem', flex: 1 }}>
                   {supplier.description}
                 </p>

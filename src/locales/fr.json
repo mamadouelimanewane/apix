@@ -32,7 +32,10 @@
     "matchmaker": "Local Content Matchmaker IA",
     "copilot": "Copilot Invest (IA)",
     "hub": "Hub Réglementaire",
-    "roi_simulator": "Simulateur ROI (ZES)"
+    "roi_simulator": "Simulateur ROI (ZES)",
+    "interoperability": "Interopérabilité Inter-Admin",
+    "open_data": "Portail Open Data",
+    "newsletter": "Newsletter Investisseurs"
   },
   "dashboard": {
     "title": "Tableau de Bord Macroéconomique",

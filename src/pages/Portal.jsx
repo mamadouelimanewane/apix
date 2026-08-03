@@ -1,18 +1,38 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Check, Clock, FileText, UserCircle, Upload, MessageCircle, AlertCircle, Plus, X } from 'lucide-react';
+import { useLocalStorage } from '../hooks/useLocalStorage';
+
+const STEP_SLA_HOURS = { 1: 48, 2: 24, 3: 24, 4: 12 };
+
+const formatRemaining = (deadline) => {
+  const diffMs = deadline - Date.now();
+  const isOverdue = diffMs < 0;
+  const totalMinutes = Math.floor(Math.abs(diffMs) / 60000);
+  const hours = Math.floor(totalMinutes / 60);
+  const minutes = totalMinutes % 60;
+  const label = `${hours}h ${minutes.toString().padStart(2, '0')}min`;
+  return { label, isOverdue };
+};
 
 const Portal = () => {
   const [activeTab, setActiveTab] = useState('dossiers');
   const [showWizard, setShowWizard] = useState(false);
   const [wizardStep, setWizardStep] = useState(1);
   const [isDocUploaded, setIsDocUploaded] = useState(false);
-  
-  const [dossiers, setDossiers] = useState([
+  const [, forceTick] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => forceTick(t => t + 1), 30000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const [dossiers, setDossiers] = useLocalStorage('apix_dossiers', [
     {
       id: 'SN-2024-8902',
       name: 'Création SARL',
       status: 'En cours',
-      step: 3
+      step: 3,
+      stepStartedAt: Date.now() - 5 * 3600 * 1000
     }
   ]);
 
@@ -27,7 +47,8 @@ const Portal = () => {
       id: `SN-${new Date().getFullYear()}-${Math.floor(Math.random() * 10000)}`,
       name: `Création ${formData.type} - ${formData.name}`,
       status: 'Nouvelle demande',
-      step: 1
+      step: 1,
+      stepStartedAt: Date.now()
     };
     setDossiers([...dossiers, newDossier]);
     setShowWizard(false);
@@ -73,15 +94,24 @@ const Portal = () => {
         {activeTab === 'dossiers' && (
           <>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-              {dossiers.map(dossier => (
+              {dossiers.map(dossier => {
+                const slaHours = STEP_SLA_HOURS[dossier.step];
+                const deadline = dossier.stepStartedAt ? dossier.stepStartedAt + slaHours * 3600 * 1000 : null;
+                const remaining = deadline && dossier.step < 4 ? formatRemaining(deadline) : null;
+                return (
                 <div key={dossier.id} className="card">
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
                     <h3 style={{ color: 'var(--brand-blue)', margin: 0 }}>Dossier #{dossier.id} : {dossier.name}</h3>
                     <span style={{ background: dossier.step === 1 ? 'rgba(59, 130, 246, 0.2)' : 'rgba(252, 209, 22, 0.2)', color: dossier.step === 1 ? 'var(--brand-blue)' : '#b39500', padding: '4px 12px', borderRadius: 'var(--radius-full)', fontSize: '0.85rem', fontWeight: 'bold' }}>
                       {dossier.status}
                     </span>
                   </div>
-                  
+                  {remaining && (
+                    <div style={{ marginBottom: '1.5rem', display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '6px 14px', borderRadius: 'var(--radius-full)', fontSize: '0.85rem', fontWeight: 'bold', background: remaining.isOverdue ? 'rgba(227, 27, 35, 0.1)' : 'rgba(0, 150, 57, 0.1)', color: remaining.isOverdue ? 'var(--accent-secondary)' : 'var(--accent-primary)' }}>
+                      <Clock size={14} /> SLA étape {dossier.step} : {remaining.isOverdue ? `Dépassé de ${remaining.label}` : `${remaining.label} restant`}
+                    </div>
+                  )}
+
                   <div className="timeline">
                     <div className={`timeline-item ${dossier.step > 1 ? 'completed' : (dossier.step === 1 ? 'active' : '')}`}>
                       <div className="timeline-icon">
@@ -137,7 +167,8 @@ const Portal = () => {
                     </div>
                   </div>
                 </div>
-              ))}
+                );
+              })}
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>

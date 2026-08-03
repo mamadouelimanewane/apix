@@ -4,5 +4,11 @@
       "source": "/((?!api/).*)",
       "destination": "/index.html"
     }
+  ],
+  "crons": [
+    {
+      "path": "/api/newsletter-send-latest",
+      "schedule": "0 12 1,15 * *"
+    }
   ]
 }

@@ -1,14 +1,58 @@
 import React, { useState } from 'react';
-import { HeadphonesIcon, MessageSquare, FileText, CheckCircle2, Clock, AlertCircle, Send, Star } from 'lucide-react';
+import { HeadphonesIcon, MessageSquare, FileText, CheckCircle2, Clock, AlertCircle, Send, Star, ShieldAlert, ArrowUpCircle, Scale } from 'lucide-react';
+import { useLocalStorage } from '../hooks/useLocalStorage';
+
+const ESCALATION_LEVELS = [
+  { level: 1, label: 'Chargé de Compte APIX' },
+  { level: 2, label: 'Direction Régionale APIX' },
+  { level: 3, label: 'Médiateur National (CPI)' }
+];
 
 const Aftercare = () => {
   const [activeTab, setActiveTab] = useState('tickets');
+  const [grievances, setGrievances] = useLocalStorage('apix_grievances', [
+    {
+      id: 'REC-2026-014',
+      subject: "Retard d'exonération douanière sur équipements ZES Diass",
+      severity: 'Élevée',
+      level: 2,
+      status: 'En médiation',
+      createdAt: '2026-07-20'
+    }
+  ]);
+  const [newSubject, setNewSubject] = useState('');
+  const [newSeverity, setNewSeverity] = useState('Moyenne');
+  const [newDescription, setNewDescription] = useState('');
 
   const tickets = [
     { id: 'TKT-2024-089', subject: 'Renouvellement Agrément Code des Investissements', date: '28 Juillet 2026', status: 'En cours', statusColor: 'var(--accent-primary)' },
     { id: 'TKT-2024-042', subject: 'Demande de Visa Long Séjour (Expatriés)', date: '15 Juillet 2026', status: 'Résolu', statusColor: '#009639' },
     { id: 'TKT-2024-091', subject: 'Problème raccordement SENELEC Zone Diass', date: '29 Juillet 2026', status: 'Nouveau', statusColor: 'var(--accent-secondary)' },
   ];
+
+  const handleFileGrievance = () => {
+    if (!newSubject.trim()) return;
+    const newGrievance = {
+      id: `REC-${new Date().getFullYear()}-${Math.floor(Math.random() * 900) + 100}`,
+      subject: newSubject,
+      description: newDescription,
+      severity: newSeverity,
+      level: 1,
+      status: 'Ouverte',
+      createdAt: new Date().toLocaleDateString('fr-FR')
+    };
+    setGrievances([newGrievance, ...grievances]);
+    setNewSubject('');
+    setNewDescription('');
+    setNewSeverity('Moyenne');
+  };
+
+  const handleEscalate = (id) => {
+    setGrievances(grievances.map(g => {
+      if (g.id !== id || g.level >= 3) return g;
+      return { ...g, level: g.level + 1, status: g.level + 1 === 3 ? 'En médiation nationale' : 'En médiation' };
+    }));
+  };
 
   return (
     <div className="aftercare-page">
@@ -23,13 +67,19 @@ const Aftercare = () => {
         {/* Sidebar Menu */}
         <div className="card" style={{ padding: '1rem' }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-            <button 
+            <button
               onClick={() => setActiveTab('tickets')}
               style={{ padding: '12px', textAlign: 'left', background: activeTab === 'tickets' ? 'rgba(30, 58, 138, 0.1)' : 'transparent', border: 'none', borderRadius: '8px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '10px', color: activeTab === 'tickets' ? 'var(--brand-blue)' : 'var(--text-secondary)', fontWeight: activeTab === 'tickets' ? 'bold' : 'normal' }}
             >
               <MessageSquare size={18} /> Mes Requêtes (Tickets)
             </button>
-            <button 
+            <button
+              onClick={() => setActiveTab('grievance')}
+              style={{ padding: '12px', textAlign: 'left', background: activeTab === 'grievance' ? 'rgba(30, 58, 138, 0.1)' : 'transparent', border: 'none', borderRadius: '8px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '10px', color: activeTab === 'grievance' ? 'var(--brand-blue)' : 'var(--text-secondary)', fontWeight: activeTab === 'grievance' ? 'bold' : 'normal' }}
+            >
+              <Scale size={18} /> Réclamation & Médiation
+            </button>
+            <button
               onClick={() => setActiveTab('survey')}
               style={{ padding: '12px', textAlign: 'left', background: activeTab === 'survey' ? 'rgba(30, 58, 138, 0.1)' : 'transparent', border: 'none', borderRadius: '8px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '10px', color: activeTab === 'survey' ? 'var(--brand-blue)' : 'var(--text-secondary)', fontWeight: activeTab === 'survey' ? 'bold' : 'normal' }}
             >
@@ -84,6 +134,73 @@ const Aftercare = () => {
                     </div>
                     <div>
                       <button className="btn-secondary" style={{ padding: '8px 16px' }}>Consulter</button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {activeTab === 'grievance' && (
+            <div>
+              <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px', background: 'rgba(227, 27, 35, 0.05)', border: '1px solid rgba(227, 27, 35, 0.15)', padding: '1.25rem', borderRadius: '8px', marginBottom: '2rem' }}>
+                <ShieldAlert size={22} color="var(--accent-secondary)" style={{ flexShrink: 0, marginTop: '2px' }} />
+                <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
+                  Mécanisme formel de réclamation (Investor Grievance Mechanism), conforme aux recommandations de la Banque Mondiale. Toute réclamation non résolue par votre Chargé de Compte est automatiquement escaladable jusqu'au Médiateur National auprès du Conseil Présidentiel de l'Investissement (CPI).
+                </p>
+              </div>
+
+              <h2 style={{ margin: '0 0 1.5rem 0', fontSize: '1.3rem', color: 'var(--brand-blue)' }}>Déposer une réclamation</h2>
+              <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '1rem', marginBottom: '1rem' }}>
+                <div className="form-group" style={{ margin: 0 }}>
+                  <label className="form-label">Objet</label>
+                  <input type="text" className="form-control" placeholder="Ex: Retard d'exonération douanière" value={newSubject} onChange={e => setNewSubject(e.target.value)} />
+                </div>
+                <div className="form-group" style={{ margin: 0 }}>
+                  <label className="form-label">Sévérité</label>
+                  <select className="form-control" value={newSeverity} onChange={e => setNewSeverity(e.target.value)}>
+                    <option>Faible</option>
+                    <option>Moyenne</option>
+                    <option>Élevée</option>
+                  </select>
+                </div>
+              </div>
+              <div className="form-group">
+                <label className="form-label">Description</label>
+                <textarea className="form-control" rows="3" placeholder="Décrivez le blocage rencontré et les administrations concernées..." value={newDescription} onChange={e => setNewDescription(e.target.value)}></textarea>
+              </div>
+              <button className="btn-primary" onClick={handleFileGrievance} disabled={!newSubject.trim()} style={{ marginBottom: '2.5rem' }}>
+                <Send size={16} /> Soumettre la réclamation
+              </button>
+
+              <h2 style={{ margin: '0 0 1.5rem 0', fontSize: '1.3rem', color: 'var(--brand-blue)' }}>Suivi des réclamations</h2>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                {grievances.map(g => (
+                  <div key={g.id} style={{ padding: '1.25rem', border: '1px solid rgba(0,0,0,0.05)', borderRadius: '8px', background: 'var(--bg-primary)' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1rem' }}>
+                      <div>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
+                          <span style={{ fontSize: '0.8rem', fontWeight: 'bold', color: 'var(--text-muted)' }}>{g.id}</span>
+                          <span style={{ fontSize: '0.75rem', padding: '4px 8px', borderRadius: '12px', background: g.severity === 'Élevée' ? 'rgba(227,27,35,0.1)' : 'rgba(252,209,22,0.15)', color: g.severity === 'Élevée' ? 'var(--accent-secondary)' : '#b39500', fontWeight: 'bold' }}>
+                            {g.severity}
+                          </span>
+                        </div>
+                        <h3 style={{ margin: '0 0 4px 0', fontSize: '1.05rem', color: 'var(--text-primary)' }}>{g.subject}</h3>
+                        <span style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>Ouverte le {g.createdAt} · {g.status}</span>
+                      </div>
+                      {g.level < 3 && (
+                        <button className="btn-secondary" style={{ padding: '8px 14px', fontSize: '0.85rem' }} onClick={() => handleEscalate(g.id)}>
+                          <ArrowUpCircle size={14} /> Escalader
+                        </button>
+                      )}
+                    </div>
+                    <div style={{ display: 'flex', gap: '0.5rem' }}>
+                      {ESCALATION_LEVELS.map(l => (
+                        <div key={l.level} style={{ flex: 1, textAlign: 'center' }}>
+                          <div style={{ height: '4px', borderRadius: '2px', background: g.level >= l.level ? 'var(--accent-secondary)' : 'rgba(0,0,0,0.08)', marginBottom: '6px' }} />
+                          <span style={{ fontSize: '0.7rem', color: g.level >= l.level ? 'var(--text-primary)' : 'var(--text-muted)', fontWeight: g.level === l.level ? 'bold' : 'normal' }}>{l.label}</span>
+                        </div>
+                      ))}
                     </div>
                   </div>
                 ))}
