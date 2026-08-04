@@ -40,11 +40,24 @@ const PortalHub = () => {
       background: '#f8fafc',
       color: '#1e293b'
     }}>
-      <div style={{ marginBottom: '3rem' }}>
-        <h1 style={{ fontSize: '2.5rem', fontWeight: '800', margin: 0, color: '#0f172a' }}>
+      <div style={{ 
+        marginBottom: '3rem', 
+        background: 'linear-gradient(135deg, #006B3F 0%, #004b2c 100%)',
+        padding: '3rem',
+        borderRadius: '20px',
+        color: 'white',
+        boxShadow: '0 10px 25px rgba(0, 107, 63, 0.2)',
+        position: 'relative',
+        overflow: 'hidden'
+      }}>
+        {/* Subtle decorative elements */}
+        <div style={{ position: 'absolute', top: '-20px', right: '-20px', width: '150px', height: '150px', background: 'rgba(255,255,255,0.05)', borderRadius: '50%' }}></div>
+        <div style={{ position: 'absolute', bottom: '-40px', right: '50px', width: '100px', height: '100px', background: 'rgba(242, 148, 0, 0.1)', borderRadius: '50%' }}></div>
+
+        <h1 style={{ fontSize: '2.5rem', fontWeight: '800', margin: 0, position: 'relative', zIndex: 10 }}>
           Bienvenue sur le Hub Investisseur
         </h1>
-        <p style={{ fontSize: '1.1rem', color: '#64748b', marginTop: '0.5rem' }}>
+        <p style={{ fontSize: '1.1rem', color: '#e2e8f0', marginTop: '0.5rem', position: 'relative', zIndex: 10 }}>
           Sélectionnez un module pour démarrer ou poursuivre vos activités.
         </p>
       </div>
@@ -62,25 +75,25 @@ const PortalHub = () => {
               background: 'white',
               borderRadius: '16px',
               padding: '2rem',
-              boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03)',
-              border: '1px solid #e2e8f0',
+              boxShadow: `0 4px 0 ${mod.color}30, 0 4px 6px -1px rgba(0, 0, 0, 0.05)`,
+              border: `1px solid ${mod.color}40`,
               cursor: 'pointer',
               display: 'flex',
               flexDirection: 'column',
-              transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+              transition: 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
               position: 'relative',
               overflow: 'hidden',
               group: 'true'
             }}
             onMouseOver={(e) => {
-              e.currentTarget.style.transform = 'translateY(-5px)';
-              e.currentTarget.style.boxShadow = '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)';
+              e.currentTarget.style.transform = 'translateY(-4px)';
+              e.currentTarget.style.boxShadow = `0 8px 0 ${mod.color}90, 0 15px 20px -5px rgba(0, 0, 0, 0.15)`;
               e.currentTarget.style.borderColor = mod.color;
             }}
             onMouseOut={(e) => {
               e.currentTarget.style.transform = 'translateY(0)';
-              e.currentTarget.style.boxShadow = '0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03)';
-              e.currentTarget.style.borderColor = '#e2e8f0';
+              e.currentTarget.style.boxShadow = `0 4px 0 ${mod.color}30, 0 4px 6px -1px rgba(0, 0, 0, 0.05)`;
+              e.currentTarget.style.borderColor = `${mod.color}40`;
             }}
           >
             <div style={{
