@@ -10,6 +10,7 @@ import AdminLayout from './pages/admin/AdminLayout'
 
 // Lazy load all pages to reduce initial bundle
 const Dashboard = React.lazy(() => import('./pages/Dashboard'))
+const PortailBureau = React.lazy(() => import('./pages/PortailBureau'))
 const Copilot = React.lazy(() => import('./pages/Copilot'))
 const Portal = React.lazy(() => import('./pages/Portal'))
 const EconomyData = React.lazy(() => import('./pages/EconomyData'))
@@ -87,6 +88,7 @@ function AppContent() {
         <Routes>
           <Route path="/" element={<SidebarLayout />}>
             <Route index element={<Dashboard />} />
+            <Route path="portail-bureau" element={<PortailBureau />} />
             <Route path="executive" element={<RequireRole roles={['agent']}><ExecutiveBoard /></RequireRole>} />
             <Route path="deal-room-apix" element={<RequireRole roles={['agent']}><DealRoom mode="apix" /></RequireRole>} />
             <Route path="deal-room-investisseur" element={<DealRoom mode="investor" />} />

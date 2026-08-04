@@ -79,6 +79,11 @@ const SidebarLayout = () => {
             <span>{t('sidebar.dashboard')}</span>
           </NavLink>
 
+          <NavLink to="/portail-bureau" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
+            <Landmark size={20} />
+            <span>Portail Bureau</span>
+          </NavLink>
+
           <div style={{ fontSize: '0.75rem', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', marginTop: '1.5rem', marginBottom: '0.5rem', fontWeight: 'bold' }}>{t('sidebar.discover_apix')}</div>
           <NavLink to="/track-record" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
             <Award size={20} />
