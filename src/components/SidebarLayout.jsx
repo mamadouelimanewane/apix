@@ -94,15 +94,6 @@ const SidebarLayout = () => {
             <span>{t('sidebar.roi_simulator')}</span>
           </NavLink>
 
-          <div style={{ fontSize: '0.75rem', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', marginTop: '1.5rem', marginBottom: '0.5rem', fontWeight: 'bold' }}>{t('sidebar.direction')}</div>
-          <NavLink to="/executive" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`} style={({isActive}) => isActive ? {} : { color: 'var(--accent-primary)' }}>
-            <ShieldCheck size={20} />
-            <span>{t('sidebar.executive_board')}</span>
-          </NavLink>
-          <NavLink to={role === ROLES.AGENT ? "/deal-room-apix" : "/deal-room-investisseur"} className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`} style={({isActive}) => isActive ? {} : { color: '#fcd34d' }}>
-            <Lock size={20} />
-            <span>{t('sidebar.smart_deal_room')}</span>
-          </NavLink>
 
           <div style={{ fontSize: '0.75rem', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', marginTop: '1.5rem', marginBottom: '0.5rem', fontWeight: 'bold' }}>{t('sidebar.tools_services')}</div>
           
@@ -229,7 +220,7 @@ const SidebarLayout = () => {
 
           <div style={{ fontSize: '0.75rem', textTransform: 'uppercase', color: '#f59e0b', marginTop: '1.5rem', marginBottom: '0.5rem', fontWeight: 'bold' }}>Innovation & DeepTech</div>
 
-          <NavLink to={role === ROLES.AGENT ? "/deal-room-apix" : "/deal-room-investisseur"} className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`} style={({isActive}) => isActive ? {} : { color: '#60a5fa' }}>
+          <NavLink to="/deal-room-investisseur" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`} style={({isActive}) => isActive ? {} : { color: '#60a5fa' }}>
             <TrendingUp size={20} />
             <span>Smart Deal Room</span>
           </NavLink>

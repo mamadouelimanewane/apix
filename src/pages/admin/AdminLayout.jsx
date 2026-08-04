@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
-import { LayoutDashboard, Users, FolderOpen, Map, FileText, Activity, LogOut, ArrowLeft, Shield } from 'lucide-react';
+import { LayoutDashboard, Users, FolderOpen, Map, FileText, Activity, LogOut, ArrowLeft, Shield, ShieldCheck, Lock } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 
 const AdminLayout = () => {
@@ -27,6 +27,16 @@ const AdminLayout = () => {
         <div style={{ padding: '20px', flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '5px' }}>
           <NavLink to="/admin" end className={({ isActive }) => `admin-nav-link ${isActive ? 'active' : ''}`} style={navLinkStyle}>
             <LayoutDashboard size={20} /> Vue d'ensemble
+          </NavLink>
+
+          <div style={{ fontSize: '0.75rem', textTransform: 'uppercase', color: '#64748b', marginTop: '1.5rem', marginBottom: '0.5rem', fontWeight: 'bold' }}>Direction & Stratégie</div>
+          
+          <NavLink to="/admin/executive" className={({ isActive }) => `admin-nav-link ${isActive ? 'active' : ''}`} style={navLinkStyle}>
+            <ShieldCheck size={20} color="var(--accent-primary)" /> Bureau Exécutif
+          </NavLink>
+
+          <NavLink to="/admin/deal-room" className={({ isActive }) => `admin-nav-link ${isActive ? 'active' : ''}`} style={navLinkStyle}>
+            <Lock size={20} color="#fcd34d" /> Smart Deal Room
           </NavLink>
 
           <div style={{ fontSize: '0.75rem', textTransform: 'uppercase', color: '#64748b', marginTop: '1.5rem', marginBottom: '0.5rem', fontWeight: 'bold' }}>Gestion Opérationnelle</div>

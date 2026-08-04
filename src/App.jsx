@@ -72,25 +72,17 @@ const LoadingFallback = () => <div style={{ padding: '2rem', textAlign: 'center'
 function AppContent() {
   const { isAuthenticated } = useAuth();
 
-  if (!isAuthenticated) {
-    return (
-      <>
-        <AntiScrapeGuard />
-        <Login />
-      </>
-    );
-  }
-
   return (
     <BrowserRouter>
       <AntiScrapeGuard />
-      <Suspense fallback={<LoadingFallback />}>
+      {!isAuthenticated ? (
+        <Login />
+      ) : (
+        <Suspense fallback={<LoadingFallback />}>
         <Routes>
           <Route path="/" element={<SidebarLayout />}>
             <Route index element={<Dashboard />} />
             <Route path="portail-bureau" element={<PortailBureau />} />
-            <Route path="executive" element={<RequireRole roles={['agent']}><ExecutiveBoard /></RequireRole>} />
-            <Route path="deal-room-apix" element={<RequireRole roles={['agent']}><DealRoom mode="apix" /></RequireRole>} />
             <Route path="deal-room-investisseur" element={<DealRoom mode="investor" />} />
             <Route path="digital-twin" element={<DigitalTwin />} />
             <Route path="interoperability" element={<Interoperability />} />
@@ -155,9 +147,12 @@ function AppContent() {
             <Route path="zes" element={<AdminZes />} />
             <Route path="content" element={<AdminContent />} />
             <Route path="live-data" element={<AdminLiveData />} />
+            <Route path="executive" element={<ExecutiveBoard />} />
+            <Route path="deal-room" element={<DealRoom mode="apix" />} />
           </Route>
         </Routes>
-      </Suspense>
+        </Suspense>
+      )}
     </BrowserRouter>
   );
 }

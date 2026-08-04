@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Lock, ArrowRight, ShieldCheck, Globe, KeyRound } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 import { useAuth, ROLES } from '../context/AuthContext';
 
@@ -12,6 +13,7 @@ const Login = () => {
   const [otpError, setOtpError] = useState('');
   const { t } = useLanguage();
   const { login } = useAuth();
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -34,6 +36,11 @@ const Login = () => {
     // Simulation de vérification MFA (tout code à 6 chiffres est accepté en mode démo)
     setTimeout(() => {
       login(email, role);
+      if (role === 'agent') {
+        navigate('/admin');
+      } else {
+        navigate('/');
+      }
     }, 1000);
   };
 
