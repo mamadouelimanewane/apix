@@ -74,7 +74,12 @@ const SidebarLayout = () => {
           </button>
         </div>
         <nav className="nav-links">
-          <NavLink to="/" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`} end>
+          <NavLink to="/portal" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`} end>
+            <LayoutDashboard size={20} />
+            <span>Hub Investisseur</span>
+          </NavLink>
+
+          <NavLink to="/dashboard" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
             <LayoutDashboard size={20} />
             <span>{t('sidebar.dashboard')}</span>
           </NavLink>

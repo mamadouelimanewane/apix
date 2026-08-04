@@ -1,5 +1,5 @@
-import React, { Suspense } from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import React, { Suspense, lazy } from 'react'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { LanguageProvider } from './context/LanguageContext'
 import { AuthProvider, useAuth } from './context/AuthContext'
 import RequireRole from './components/RequireRole'
@@ -54,10 +54,14 @@ const MacroReports = React.lazy(() => import('./pages/MacroReports'))
 const FactorCosts = React.lazy(() => import('./pages/FactorCosts'))
 
 // Wow features
-const ZesExplorer = React.lazy(() => import('./pages/ZesExplorer'))
-const PitchDeckGenerator = React.lazy(() => import('./pages/PitchDeckGenerator'))
-const CarbonSimulator = React.lazy(() => import('./pages/CarbonSimulator'))
-const LiveTransparency = React.lazy(() => import('./pages/LiveTransparency'))
+const ZesExplorer = lazy(() => import('./pages/ZesExplorer'));
+const PitchDeckGenerator = lazy(() => import('./pages/PitchDeckGenerator'));
+const CarbonSimulator = lazy(() => import('./pages/CarbonSimulator'));
+const LiveTransparency = lazy(() => import('./pages/LiveTransparency'));
+
+// Nouveaux composants (Landing & Hub)
+const LandingPage = lazy(() => import('./pages/public/LandingPage'));
+const PortalHub = lazy(() => import('./pages/investor/PortalHub'));
 
 // Admin pages
 const AdminDashboard = React.lazy(() => import('./pages/admin/AdminDashboard'))
@@ -75,68 +79,69 @@ function AppContent() {
   return (
     <BrowserRouter>
       <AntiScrapeGuard />
-      {!isAuthenticated ? (
-        <Login />
-      ) : (
-        <Suspense fallback={<LoadingFallback />}>
+      <Suspense fallback={<LoadingFallback />}>
         <Routes>
-          <Route path="/" element={<SidebarLayout />}>
-            <Route index element={<Dashboard />} />
-            <Route path="portail-bureau" element={<PortailBureau />} />
-            <Route path="deal-room-investisseur" element={<DealRoom mode="investor" />} />
-            <Route path="digital-twin" element={<DigitalTwin />} />
-            <Route path="interoperability" element={<Interoperability />} />
-            <Route path="open-data" element={<OpenData />} />
-            <Route path="newsletter" element={<Newsletter />} />
+          {/* Public Routes */}
+          <Route path="/" element={!isAuthenticated ? <LandingPage /> : <Navigate to="/portal" />} />
+          <Route path="/login" element={<Login />} />
 
-            <Route path="macro-reports" element={<MacroReports />} />
-            <Route path="factor-costs" element={<FactorCosts />} />
+          {/* Investor Routes */}
+          <Route element={<RequireRole roles={['investisseur', 'agent']}><SidebarLayout /></RequireRole>}>
+            <Route path="/portal" element={<PortalHub />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/portail-bureau" element={<PortailBureau />} />
+            <Route path="/deal-room-investisseur" element={<DealRoom mode="investor" />} />
+            <Route path="/digital-twin" element={<DigitalTwin />} />
+            <Route path="/interoperability" element={<Interoperability />} />
+            <Route path="/open-data" element={<OpenData />} />
+            <Route path="/newsletter" element={<Newsletter />} />
 
-            <Route path="guichet-unique" element={<GuichetUnique />} />
-            <Route path="track-record" element={<ApixTrackRecord />} />
-            <Route path="roi-simulator" element={<RoiSimulator />} />
-            <Route path="economy" element={<EconomyData />} />
-            <Route path="opportunities" element={<SectorOpportunities />} />
-            <Route path="regulatory" element={<RegulatoryHub />} />
-            <Route path="map" element={<Map />} />
-            <Route path="siteselector" element={<SiteSelector />} />
+            <Route path="/macro-reports" element={<MacroReports />} />
+            <Route path="/factor-costs" element={<FactorCosts />} />
 
-            <Route path="finance" element={<FinanceHub />} />
-            <Route path="living" element={<LifeQuality />} />
+            <Route path="/track-record" element={<ApixTrackRecord />} />
+            <Route path="/roi-simulator" element={<RoiSimulator />} />
+            <Route path="/economy" element={<EconomyData />} />
+            <Route path="/opportunities" element={<SectorOpportunities />} />
+            <Route path="/regulatory" element={<RegulatoryHub />} />
+            <Route path="/map" element={<Map />} />
+            <Route path="/siteselector" element={<SiteSelector />} />
 
-            <Route path="roadmap" element={<RoadmapBuilder />} />
-            <Route path="simulator" element={<Simulator />} />
-            <Route path="copilot" element={<Copilot />} />
-            <Route path="portal" element={<Portal />} />
-            <Route path="matchmaking" element={<Matchmaking />} />
-            <Route path="aftercare" element={<Aftercare />} />
+            <Route path="/finance" element={<FinanceHub />} />
+            <Route path="/living" element={<LifeQuality />} />
+
+            <Route path="/roadmap" element={<RoadmapBuilder />} />
+            <Route path="/simulator" element={<Simulator />} />
+            <Route path="/copilot" element={<Copilot />} />
+            <Route path="/matchmaking" element={<Matchmaking />} />
+            <Route path="/aftercare" element={<Aftercare />} />
             
-            <Route path="guichet-unique" element={<GuichetUnique />} />
-            <Route path="tracking" element={<LogisticsTracking />} />
-            <Route path="business-plan" element={<BusinessPlanGenerator />} />
-            <Route path="virtual-tours" element={<VirtualTours />} />
-            <Route path="funding" element={<FundingFinder />} />
-            <Route path="esg-tracker" element={<EsgTracker />} />
-            <Route path="events" element={<InvestorEvents />} />
-            <Route path="culture" element={<CulturalGuide />} />
-            <Route path="jobs" element={<JobBoard />} />
+            <Route path="/guichet-unique" element={<GuichetUnique />} />
+            <Route path="/tracking" element={<LogisticsTracking />} />
+            <Route path="/business-plan" element={<BusinessPlanGenerator />} />
+            <Route path="/virtual-tours" element={<VirtualTours />} />
+            <Route path="/funding" element={<FundingFinder />} />
+            <Route path="/esg-tracker" element={<EsgTracker />} />
+            <Route path="/events" element={<InvestorEvents />} />
+            <Route path="/culture" element={<CulturalGuide />} />
+            <Route path="/jobs" element={<JobBoard />} />
 
-            <Route path="war-room" element={<WarRoom />} />
-            <Route path="ai-avatar" element={<AIAvatar />} />
-            <Route path="smart-contracts" element={<SmartContracts />} />
-            <Route path="satellite" element={<SatelliteMap />} />
-            <Route path="brownfield" element={<BrownfieldMarket />} />
+            <Route path="/war-room" element={<WarRoom />} />
+            <Route path="/ai-avatar" element={<AIAvatar />} />
+            <Route path="/smart-contracts" element={<SmartContracts />} />
+            <Route path="/satellite" element={<SatelliteMap />} />
+            <Route path="/brownfield" element={<BrownfieldMarket />} />
 
-            <Route path="legal-library" element={<LegalLibrary />} />
-            <Route path="tax-incentives" element={<TaxIncentives />} />
-            <Route path="compliance" element={<ComplianceChecker />} />
-            <Route path="legal-avatar" element={<LegalAvatar />} />
+            <Route path="/legal-library" element={<LegalLibrary />} />
+            <Route path="/tax-incentives" element={<TaxIncentives />} />
+            <Route path="/compliance" element={<ComplianceChecker />} />
+            <Route path="/legal-avatar" element={<LegalAvatar />} />
             
             {/* Wow Features */}
-            <Route path="zes-explorer" element={<ZesExplorer />} />
-            <Route path="pitch-deck" element={<PitchDeckGenerator />} />
-            <Route path="carbon-simulator" element={<CarbonSimulator />} />
-            <Route path="live-data" element={<LiveTransparency />} />
+            <Route path="/zes-explorer" element={<ZesExplorer />} />
+            <Route path="/pitch-deck" element={<PitchDeckGenerator />} />
+            <Route path="/carbon-simulator" element={<CarbonSimulator />} />
+            <Route path="/live-data" element={<LiveTransparency />} />
           </Route>
 
           {/* BACKOFFICE ROUTES */}
@@ -151,8 +156,7 @@ function AppContent() {
             <Route path="deal-room" element={<DealRoom mode="apix" />} />
           </Route>
         </Routes>
-        </Suspense>
-      )}
+      </Suspense>
     </BrowserRouter>
   );
 }

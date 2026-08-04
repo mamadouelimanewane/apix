@@ -39,7 +39,7 @@ const Login = () => {
       if (role === 'agent') {
         navigate('/admin');
       } else {
-        navigate('/');
+        navigate('/portal');
       }
     }, 1000);
   };
