@@ -57,7 +57,7 @@ const PortalHub = () => {
         <h1 style={{ fontSize: '2.8rem', fontWeight: '800', margin: 0, position: 'relative', zIndex: 10 }}>
           Bienvenue sur le Hub Investisseur
         </h1>
-        <p style={{ fontSize: '1.2rem', color: '#e2e8f0', marginTop: '0.5rem', position: 'relative', zIndex: 10 }}>
+        <p style={{ fontSize: '1.3rem', color: '#e2e8f0', marginTop: '0.5rem', position: 'relative', zIndex: 10 }}>
           Sélectionnez un module pour démarrer ou poursuivre vos activités.
         </p>
       </div>
@@ -114,7 +114,7 @@ const PortalHub = () => {
               {mod.title}
             </h3>
             
-            <p style={{ fontSize: '1.05rem', color: '#475569', lineHeight: '1.5', flex: 1 }}>
+            <p style={{ fontSize: '1.15rem', color: '#475569', lineHeight: '1.5', flex: 1 }}>
               {mod.desc}
             </p>
 
@@ -124,7 +124,7 @@ const PortalHub = () => {
               alignItems: 'center',
               color: mod.color,
               fontWeight: '700',
-              fontSize: '1rem',
+              fontSize: '1.1rem',
               gap: '0.5rem'
             }}>
               Accéder <ArrowRight size={18} />
