@@ -99,7 +99,7 @@ const SidebarLayout = () => {
             <ShieldCheck size={20} />
             <span>{t('sidebar.executive_board')}</span>
           </NavLink>
-          <NavLink to="/deal-room" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`} style={({isActive}) => isActive ? {} : { color: '#fcd34d' }}>
+          <NavLink to={role === ROLES.AGENT ? "/deal-room-apix" : "/deal-room-investisseur"} className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`} style={({isActive}) => isActive ? {} : { color: '#fcd34d' }}>
             <Lock size={20} />
             <span>{t('sidebar.smart_deal_room')}</span>
           </NavLink>
