@@ -55,6 +55,7 @@ const FactorCosts = React.lazy(() => import('./pages/FactorCosts'))
 // Wow features
 const ZesExplorer = React.lazy(() => import('./pages/ZesExplorer'))
 const PitchDeckGenerator = React.lazy(() => import('./pages/PitchDeckGenerator'))
+const CarbonSimulator = React.lazy(() => import('./pages/CarbonSimulator'))
 const LiveTransparency = React.lazy(() => import('./pages/LiveTransparency'))
 
 // Admin pages
