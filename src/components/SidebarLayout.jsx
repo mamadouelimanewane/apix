@@ -271,6 +271,15 @@ const SidebarLayout = () => {
             <span>Avocat Conseil IA</span>
           </NavLink>
 
+          {role === ROLES.AGENT && (
+            <div style={{ marginTop: '2rem', padding: '10px 0', borderTop: '1px solid rgba(255,255,255,0.1)' }}>
+              <NavLink to="/admin" className="nav-link" style={{ background: 'rgba(239, 68, 68, 0.15)', color: '#ef4444', fontWeight: 'bold' }}>
+                <Shield size={20} />
+                <span>Backoffice APIX</span>
+              </NavLink>
+            </div>
+          )}
+
         </nav>
       </aside>
       <div className="main-content" style={{ padding: 0, display: 'flex', flexDirection: 'column', height: '100vh' }}>

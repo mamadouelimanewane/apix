@@ -6,6 +6,7 @@ import RequireRole from './components/RequireRole'
 import AntiScrapeGuard from './components/AntiScrapeGuard'
 import SidebarLayout from './components/SidebarLayout'
 import Login from './pages/Login'
+import AdminLayout from './pages/admin/AdminLayout'
 
 // Lazy load all pages to reduce initial bundle
 const Dashboard = React.lazy(() => import('./pages/Dashboard'))
@@ -54,8 +55,15 @@ const FactorCosts = React.lazy(() => import('./pages/FactorCosts'))
 // Wow features
 const ZesExplorer = React.lazy(() => import('./pages/ZesExplorer'))
 const PitchDeckGenerator = React.lazy(() => import('./pages/PitchDeckGenerator'))
-const CarbonSimulator = React.lazy(() => import('./pages/CarbonSimulator'))
 const LiveTransparency = React.lazy(() => import('./pages/LiveTransparency'))
+
+// Admin pages
+const AdminDashboard = React.lazy(() => import('./pages/admin/AdminDashboard'))
+const AdminCRM = React.lazy(() => import('./pages/admin/AdminCRM'))
+const AdminGuichet = React.lazy(() => import('./pages/admin/AdminGuichet'))
+const AdminZes = React.lazy(() => import('./pages/admin/AdminZes'))
+const AdminContent = React.lazy(() => import('./pages/admin/AdminContent'))
+const AdminLiveData = React.lazy(() => import('./pages/admin/AdminLiveData'))
 
 const LoadingFallback = () => <div style={{ padding: '2rem', textAlign: 'center' }}>Chargement...</div>
 
@@ -133,6 +141,16 @@ function AppContent() {
             <Route path="pitch-deck" element={<PitchDeckGenerator />} />
             <Route path="carbon-simulator" element={<CarbonSimulator />} />
             <Route path="live-data" element={<LiveTransparency />} />
+          </Route>
+
+          {/* BACKOFFICE ROUTES */}
+          <Route path="/admin" element={<RequireRole roles={['agent']}><AdminLayout /></RequireRole>}>
+            <Route index element={<AdminDashboard />} />
+            <Route path="crm" element={<AdminCRM />} />
+            <Route path="guichet" element={<AdminGuichet />} />
+            <Route path="zes" element={<AdminZes />} />
+            <Route path="content" element={<AdminContent />} />
+            <Route path="live-data" element={<AdminLiveData />} />
           </Route>
         </Routes>
       </Suspense>
