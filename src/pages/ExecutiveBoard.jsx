@@ -35,18 +35,42 @@ const ExecutiveBoard = () => {
   return (
     <div className="executive-page" style={{ background: '#0f172a', minHeight: 'calc(100vh - 4rem)', padding: '2rem', color: 'white', borderRadius: '12px' }}>
       
-      {/* HEADER SECTION */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '2.5rem' }}>
-        <div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '0.5rem' }}>
-            <ShieldCheck size={36} color="var(--accent-primary)" />
-            <h1 style={{ fontSize: '2rem', margin: 0, fontWeight: '700', letterSpacing: '-0.5px' }}>Executive Command Center</h1>
+      {/* HEADER BANNER */}
+      <div style={{ 
+        marginBottom: '2.5rem',
+        background: 'linear-gradient(135deg, #7f1d1d 0%, #450a0a 100%)',
+        padding: '3rem 3.5rem',
+        borderRadius: '20px',
+        color: 'white',
+        boxShadow: '0 10px 25px rgba(227, 27, 35, 0.2)',
+        position: 'relative',
+        overflow: 'hidden',
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center'
+      }}>
+        {/* Decorative elements */}
+        <div style={{ position: 'absolute', top: '-30px', left: '-30px', width: '200px', height: '200px', background: 'rgba(255,255,255,0.03)', borderRadius: '50%' }}></div>
+        <div style={{ position: 'absolute', bottom: '-50px', right: '10%', width: '150px', height: '150px', background: 'rgba(242, 148, 0, 0.1)', borderRadius: '50%' }}></div>
+
+        <div style={{ position: 'relative', zIndex: 10, maxWidth: '800px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '15px', marginBottom: '1rem' }}>
+            <ShieldCheck size={40} color="#F29400" />
+            <h1 style={{ fontSize: '2.8rem', margin: 0, fontWeight: '800', letterSpacing: '-0.5px' }}>
+              Le Bureau Exécutif de l'APIX
+            </h1>
           </div>
-          <p style={{ color: '#94a3b8', margin: 0, fontSize: '1.1rem' }}>Accès Direction Générale APIX - Vue consolidée du pipeline FDI et intelligence économique.</p>
+          <p style={{ color: '#fca5a5', margin: 0, fontSize: '1.25rem', lineHeight: '1.6' }}>
+            Centre de commandement exécutif de l'institution. Pilotage stratégique des investissements, gestion du portefeuille d'agréments, supervision des Zones Économiques et suivi macroéconomique.
+          </p>
         </div>
-        <div style={{ background: 'rgba(242, 148, 0, 0.1)', border: '1px solid var(--accent-primary)', padding: '10px 20px', borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '10px' }}>
-          <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: 'var(--accent-primary)', boxShadow: '0 0 10px var(--accent-primary)' }}></div>
-          <span style={{ color: 'var(--accent-primary)', fontWeight: 'bold' }}>LIVE DATA FEED</span>
+
+        <div style={{ position: 'relative', zIndex: 10, background: 'rgba(0, 0, 0, 0.4)', backdropFilter: 'blur(10px)', border: '1px solid rgba(242, 148, 0, 0.3)', padding: '15px 25px', borderRadius: '12px', display: 'flex', alignItems: 'center', gap: '15px' }}>
+          <div style={{ width: '14px', height: '14px', borderRadius: '50%', background: '#F29400', boxShadow: '0 0 15px #F29400', animation: 'pulse 2s infinite' }}></div>
+          <div>
+            <span style={{ color: '#F29400', fontWeight: 'bold', display: 'block', fontSize: '0.9rem', letterSpacing: '1px' }}>STATUT SYSTÈME</span>
+            <span style={{ color: 'white', fontWeight: '600', fontSize: '1.1rem' }}>LIVE FEED ACTIF</span>
+          </div>
         </div>
       </div>
 
