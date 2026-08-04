@@ -43,7 +43,7 @@ const PortalHub = () => {
       <div style={{ 
         marginBottom: '3rem', 
         background: 'linear-gradient(135deg, #006B3F 0%, #004b2c 100%)',
-        padding: '3rem',
+        padding: '3.5rem 3rem',
         borderRadius: '20px',
         color: 'white',
         boxShadow: '0 10px 25px rgba(0, 107, 63, 0.2)',
@@ -54,10 +54,10 @@ const PortalHub = () => {
         <div style={{ position: 'absolute', top: '-20px', right: '-20px', width: '150px', height: '150px', background: 'rgba(255,255,255,0.05)', borderRadius: '50%' }}></div>
         <div style={{ position: 'absolute', bottom: '-40px', right: '50px', width: '100px', height: '100px', background: 'rgba(242, 148, 0, 0.1)', borderRadius: '50%' }}></div>
 
-        <h1 style={{ fontSize: '2.5rem', fontWeight: '800', margin: 0, position: 'relative', zIndex: 10 }}>
+        <h1 style={{ fontSize: '2.8rem', fontWeight: '800', margin: 0, position: 'relative', zIndex: 10 }}>
           Bienvenue sur le Hub Investisseur
         </h1>
-        <p style={{ fontSize: '1.1rem', color: '#e2e8f0', marginTop: '0.5rem', position: 'relative', zIndex: 10 }}>
+        <p style={{ fontSize: '1.2rem', color: '#e2e8f0', marginTop: '0.5rem', position: 'relative', zIndex: 10 }}>
           Sélectionnez un module pour démarrer ou poursuivre vos activités.
         </p>
       </div>
@@ -110,11 +110,11 @@ const PortalHub = () => {
               {mod.icon}
             </div>
             
-            <h3 style={{ fontSize: '1.25rem', fontWeight: '700', marginBottom: '0.5rem', color: '#0f172a' }}>
+            <h3 style={{ fontSize: '1.4rem', fontWeight: '800', marginBottom: '0.5rem', color: '#0f172a' }}>
               {mod.title}
             </h3>
             
-            <p style={{ fontSize: '0.95rem', color: '#64748b', lineHeight: '1.5', flex: 1 }}>
+            <p style={{ fontSize: '1.05rem', color: '#475569', lineHeight: '1.5', flex: 1 }}>
               {mod.desc}
             </p>
 
@@ -123,11 +123,11 @@ const PortalHub = () => {
               display: 'flex',
               alignItems: 'center',
               color: mod.color,
-              fontWeight: '600',
-              fontSize: '0.9rem',
+              fontWeight: '700',
+              fontSize: '1rem',
               gap: '0.5rem'
             }}>
-              Accéder <ArrowRight size={16} />
+              Accéder <ArrowRight size={18} />
             </div>
           </div>
         ))}
