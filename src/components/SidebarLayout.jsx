@@ -13,6 +13,7 @@ const SidebarLayout = () => {
   const [toast, setToast] = useState(null);
   const location = useLocation();
   const initials = (email || 'AP').slice(0, 2).toUpperCase();
+  const isPortalHub = location.pathname === '/portal' || location.pathname === '/portal/';
 
   // Close mobile menu on route change
   useEffect(() => {
@@ -62,12 +63,13 @@ const SidebarLayout = () => {
       )}
 
       {/* Mobile Overlay */}
-      {isMobileMenuOpen && (
+      {isMobileMenuOpen && !isPortalHub && (
         <div className="mobile-overlay" onClick={() => setIsMobileMenuOpen(false)}></div>
       )}
 
-      <aside className={`sidebar ${isMobileMenuOpen ? 'open' : ''}`}>
-        <div className="sidebar-logo" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      {!isPortalHub && (
+        <aside className={`sidebar ${isMobileMenuOpen ? 'open' : ''}`}>
+          <div className="sidebar-logo" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <div>APIX <span>Invest</span></div>
           <button className="mobile-only" onClick={() => setIsMobileMenuOpen(false)} style={{ background: 'transparent', border: 'none', color: 'white', cursor: 'pointer' }}>
             <X size={24} />
@@ -283,68 +285,78 @@ const SidebarLayout = () => {
 
         </nav>
       </aside>
-      <div className="main-content" style={{ padding: 0, display: 'flex', flexDirection: 'column', height: '100vh' }}>
+      )}
+
+      <div className="main-content" style={{ 
+        padding: 0, 
+        display: 'flex', 
+        flexDirection: 'column', 
+        height: '100vh',
+        marginLeft: location.pathname === '/portal' ? 0 : undefined,
+        maxWidth: location.pathname === '/portal' ? '100%' : undefined
+      }}>
         {/* Confidential Banner */}
         <div style={{ background: '#ef4444', color: 'white', padding: '6px', textAlign: 'center', fontSize: '0.75rem', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '1px', overflow: 'hidden' }}>
           <marquee scrollamount="6">⚠️ PROTOTYPE CONFIDENTIEL - Réservé à l'usage exclusif de la Direction Générale de l'APIX et du Gouvernement. Ne pas distribuer.</marquee>
         </div>
         {/* TOPBAR INTERNATIONALE */}
-        <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem 2rem', background: 'white', borderBottom: '1px solid rgba(0,0,0,0.05)', height: '70px', flexShrink: 0 }}>
-          
-          <div style={{ display: 'flex', alignItems: 'center' }}>
-            <button className="hamburger-btn" onClick={() => setIsMobileMenuOpen(true)}>
-              <Menu size={24} />
-            </button>
-            {/* On Desktop, this area is empty or for future breadcrumbs */}
-          </div>
-
-          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', background: 'var(--bg-tertiary)', padding: '6px 12px', borderRadius: '20px' }}>
-              <DollarSign size={16} color="var(--brand-blue)" />
-              <select style={{ background: 'transparent', border: 'none', outline: 'none', fontWeight: 'bold', color: 'var(--text-primary)', cursor: 'pointer' }}>
-                <option>USD ($)</option>
-                <option>EUR (€)</option>
-                <option>XOF (FCFA)</option>
-              </select>
-            </div>
+        {location.pathname !== '/portal' && (
+          <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem 2rem', background: 'white', borderBottom: '1px solid rgba(0,0,0,0.05)', height: '70px', flexShrink: 0 }}>
             
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', background: 'var(--bg-tertiary)', padding: '6px 12px', borderRadius: '20px' }}>
-              <Globe size={16} color="var(--brand-blue)" />
-              <select 
-                value={language}
-                onChange={(e) => setLanguage(e.target.value)}
-                style={{ background: 'transparent', border: 'none', outline: 'none', fontWeight: 'bold', color: 'var(--text-primary)', cursor: 'pointer' }}
-              >
-                <option value="fr">FR</option>
-                <option value="en">EN</option>
-                <option value="ar">AR</option>
-                <option value="zh">ZH</option>
-              </select>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+              <button className="hamburger-btn" onClick={() => setIsMobileMenuOpen(true)}>
+                <Menu size={24} />
+              </button>
             </div>
 
-            <button onClick={toggleFullscreen} style={{ background: 'var(--bg-tertiary)', border: 'none', color: 'var(--text-secondary)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', width: '36px', height: '36px', borderRadius: '50%' }}>
-              {isFullscreen ? <Minimize size={18} /> : <Maximize size={18} />}
-            </button>
-
-            <div style={{ position: 'relative' }}>
-              <div
-                onClick={() => setIsUserMenuOpen(prev => !prev)}
-                style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'var(--brand-blue)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: 'bold', cursor: 'pointer' }}
-              >
-                {initials}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', background: 'var(--bg-tertiary)', padding: '6px 12px', borderRadius: '20px' }}>
+                <DollarSign size={16} color="var(--brand-blue)" />
+                <select style={{ background: 'transparent', border: 'none', outline: 'none', fontWeight: 'bold', color: 'var(--text-primary)', cursor: 'pointer' }}>
+                  <option>USD ($)</option>
+                  <option>EUR (€)</option>
+                  <option>XOF (FCFA)</option>
+                </select>
               </div>
-              {isUserMenuOpen && (
-                <div style={{ position: 'absolute', top: '50px', right: 0, background: 'white', borderRadius: 'var(--radius-md)', boxShadow: 'var(--shadow-lg)', padding: '1rem', width: '240px', zIndex: 200 }}>
-                  <p style={{ fontWeight: 'bold', margin: '0 0 4px 0', fontSize: '0.9rem', color: 'var(--text-primary)' }}>{email}</p>
-                  <p style={{ margin: '0 0 1rem 0', fontSize: '0.8rem', color: 'var(--text-secondary)' }}>{ROLES[role]?.label}</p>
-                  <button onClick={logout} style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--accent-secondary)', fontSize: '0.9rem', fontWeight: '600' }}>
-                    <LogOut size={16} /> Se déconnecter
-                  </button>
+              
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', background: 'var(--bg-tertiary)', padding: '6px 12px', borderRadius: '20px' }}>
+                <Globe size={16} color="var(--brand-blue)" />
+                <select 
+                  value={language}
+                  onChange={(e) => setLanguage(e.target.value)}
+                  style={{ background: 'transparent', border: 'none', outline: 'none', fontWeight: 'bold', color: 'var(--text-primary)', cursor: 'pointer' }}
+                >
+                  <option value="fr">FR</option>
+                  <option value="en">EN</option>
+                  <option value="ar">AR</option>
+                  <option value="zh">ZH</option>
+                </select>
+              </div>
+
+              <button onClick={toggleFullscreen} style={{ background: 'var(--bg-tertiary)', border: 'none', color: 'var(--text-secondary)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', width: '36px', height: '36px', borderRadius: '50%' }}>
+                {isFullscreen ? <Minimize size={18} /> : <Maximize size={18} />}
+              </button>
+
+              <div style={{ position: 'relative' }}>
+                <div
+                  onClick={() => setIsUserMenuOpen(prev => !prev)}
+                  style={{ width: '40px', height: '40px', borderRadius: '50%', background: 'var(--brand-blue)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: 'bold', cursor: 'pointer' }}
+                >
+                  {initials}
                 </div>
-              )}
+                {isUserMenuOpen && (
+                  <div style={{ position: 'absolute', top: '50px', right: 0, background: 'white', borderRadius: 'var(--radius-md)', boxShadow: 'var(--shadow-lg)', padding: '1rem', width: '240px', zIndex: 200 }}>
+                    <p style={{ fontWeight: 'bold', margin: '0 0 4px 0', fontSize: '0.9rem', color: 'var(--text-primary)' }}>{email}</p>
+                    <p style={{ margin: '0 0 1rem 0', fontSize: '0.8rem', color: 'var(--text-secondary)' }}>{ROLES[role]?.label}</p>
+                    <button onClick={logout} style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--accent-secondary)', fontSize: '0.9rem', fontWeight: '600' }}>
+                      <LogOut size={16} /> Se déconnecter
+                    </button>
+                  </div>
+                )}
+              </div>
             </div>
-          </div>
-        </header>
+          </header>
+        )}
 
         <div className="main-content-scroll" style={{ padding: '2rem', flex: 1, overflowY: 'auto' }}>
           <div key={location.pathname} className="page-fade-in" style={{ height: '100%' }}>
