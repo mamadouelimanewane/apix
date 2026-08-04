@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
-import { LayoutDashboard, MessageSquare, Map as MapIcon, Calculator, FileText, Users, BookOpen, BarChart3, Landmark, Palmtree, MapPin, Route as RouteIcon, Briefcase, HeadphonesIcon, ShieldCheck, Lock, Layers, Award, Globe, DollarSign, Menu, X, Network, Database, LogOut, Newspaper } from 'lucide-react';
+import { LayoutDashboard, MessageSquare, Map as MapIcon, Calculator, FileText, Users, BookOpen, BarChart3, Landmark, Palmtree, MapPin, Route as RouteIcon, Briefcase, HeadphonesIcon, ShieldCheck, Lock, Layers, Award, Globe, DollarSign, Menu, X, Network, Database, LogOut, Newspaper, Building2, Truck, View, Leaf, Calendar, Bot, Hexagon, Satellite, Factory, TrendingUp, Maximize, Minimize, Scale, Shield, ClipboardCheck, Gavel, LineChart, Presentation, Activity, BatteryCharging } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { useAuth, ROLES } from '../context/AuthContext';
 
@@ -9,6 +9,8 @@ const SidebarLayout = () => {
   const { email, role, logout } = useAuth();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+  const [toast, setToast] = useState(null);
   const location = useLocation();
   const initials = (email || 'AP').slice(0, 2).toUpperCase();
 
@@ -17,8 +19,48 @@ const SidebarLayout = () => {
     setIsMobileMenuOpen(false);
   }, [location.pathname]);
 
+  // Fake Live Notifications
+  useEffect(() => {
+    const notifications = [
+      "🟢 Nouvel investisseur connecté depuis Dubaï (Émirats Arabes Unis).",
+      "📝 Convention de financement #459 validée sur la Blockchain.",
+      "🚢 Conteneur MAEU8930 dédouané au Port Autonome de Dakar (Gaindé 2000)."
+    ];
+    let count = 0;
+    
+    const interval = setInterval(() => {
+      setToast(notifications[count % notifications.length]);
+      count++;
+      
+      setTimeout(() => {
+        setToast(null);
+      }, 5000);
+    }, 15000);
+    
+    return () => clearInterval(interval);
+  }, []);
+
+  const toggleFullscreen = () => {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen().catch(err => console.log(err));
+      setIsFullscreen(true);
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+        setIsFullscreen(false);
+      }
+    }
+  };
+
   return (
-    <div className="app-container">
+    <div className="app-container" style={{ position: 'relative' }}>
+      {/* Toast Notification */}
+      {toast && (
+        <div style={{ position: 'fixed', bottom: '20px', right: '20px', background: 'rgba(0,0,0,0.8)', color: 'white', padding: '12px 24px', borderRadius: '8px', zIndex: 9999, boxShadow: '0 10px 15px -3px rgba(0,0,0,0.3)', backdropFilter: 'blur(10px)', animation: 'slideUp 0.3s ease', borderLeft: '4px solid #10b981' }}>
+          {toast}
+        </div>
+      )}
+
       {/* Mobile Overlay */}
       {isMobileMenuOpen && (
         <div className="mobile-overlay" onClick={() => setIsMobileMenuOpen(false)}></div>
@@ -98,11 +140,146 @@ const SidebarLayout = () => {
             <Newspaper size={20} />
             <span>{t('sidebar.newsletter')}</span>
           </NavLink>
+
+          <div style={{ fontSize: '0.75rem', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', marginTop: '1.5rem', marginBottom: '0.5rem', fontWeight: 'bold' }}>DeepTech & Innovation Ultime</div>
+
+          <NavLink to="/live-data" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
+            <Activity size={20} color="#ef4444" />
+            <span style={{ color: '#ef4444', fontWeight: 'bold' }}>APIX Live (Temps Réel)</span>
+          </NavLink>
+
+          <NavLink to="/zes-explorer" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
+            <Satellite size={20} />
+            <span>Cadastre ZES Interactif</span>
+          </NavLink>
+
+          <NavLink to="/pitch-deck" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
+            <Presentation size={20} />
+            <span>Pitch Deck IA</span>
+          </NavLink>
+
+          <NavLink to="/carbon-simulator" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
+            <BatteryCharging size={20} />
+            <span>Simulateur ESG & Carbone</span>
+          </NavLink>
+
+          <div style={{ fontSize: '0.75rem', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', marginTop: '1.5rem', marginBottom: '0.5rem', fontWeight: 'bold' }}>Facilitation & Info</div>
+          
+          <NavLink to="/macro-reports" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
+            <BarChart3 size={20} />
+            <span>Rapports Macro (FMI/BM)</span>
+          </NavLink>
+
+          <NavLink to="/factor-costs" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
+            <LineChart size={20} />
+            <span>Coûts des Facteurs</span>
+          </NavLink>
+
+          <NavLink to="/guichet-unique" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
+            <Building2 size={20} />
+            <span>E-Procédures (Guichet)</span>
+          </NavLink>
+
+          <NavLink to="/tracking" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
+            <Truck size={20} />
+            <span>Suivi Douanier</span>
+          </NavLink>
+
+          <NavLink to="/business-plan" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
+            <FileText size={20} />
+            <span>Business Plan</span>
+          </NavLink>
+
+          <NavLink to="/virtual-tours" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
+            <View size={20} />
+            <span>Visites 360° ZES</span>
+          </NavLink>
+
+          <NavLink to="/funding" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
+            <DollarSign size={20} />
+            <span>Financements</span>
+          </NavLink>
+
+          <NavLink to="/esg-tracker" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
+            <Leaf size={20} />
+            <span>Impact ESG</span>
+          </NavLink>
+
+          <div style={{ fontSize: '0.75rem', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', marginTop: '1.5rem', marginBottom: '0.5rem', fontWeight: 'bold' }}>Accompagnement</div>
+
+          <NavLink to="/events" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
+            <Calendar size={20} />
+            <span>Communauté & Events</span>
+          </NavLink>
+
+          <NavLink to="/culture" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
+            <BookOpen size={20} />
+            <span>Guide Culturel</span>
+          </NavLink>
+
+          <NavLink to="/jobs" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
+            <Briefcase size={20} />
+            <span>Bourse de l'Emploi</span>
+          </NavLink>
+
+          <div style={{ fontSize: '0.75rem', textTransform: 'uppercase', color: '#f59e0b', marginTop: '1.5rem', marginBottom: '0.5rem', fontWeight: 'bold' }}>Innovation & DeepTech</div>
+
+          <NavLink to="/war-room" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`} style={({isActive}) => isActive ? {} : { color: '#60a5fa' }}>
+            <TrendingUp size={20} />
+            <span>War Room Prédictif</span>
+          </NavLink>
+
+          <NavLink to="/ai-avatar" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`} style={({isActive}) => isActive ? {} : { color: '#38bdf8' }}>
+            <Bot size={20} />
+            <span>Concierge IA 3D</span>
+          </NavLink>
+
+          <NavLink to="/smart-contracts" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`} style={({isActive}) => isActive ? {} : { color: '#8b5cf6' }}>
+            <Hexagon size={20} />
+            <span>Smart Contracts</span>
+          </NavLink>
+
+          <NavLink to="/satellite" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`} style={({isActive}) => isActive ? {} : { color: '#0284c7' }}>
+            <Satellite size={20} />
+            <span>APIX Earth (Satellite)</span>
+          </NavLink>
+
+          <NavLink to="/brownfield" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`} style={({isActive}) => isActive ? {} : { color: '#f97316' }}>
+            <Factory size={20} />
+            <span>Actifs Industriels</span>
+          </NavLink>
+
+          <div style={{ fontSize: '0.75rem', textTransform: 'uppercase', color: '#10b981', marginTop: '1.5rem', marginBottom: '0.5rem', fontWeight: 'bold' }}>Pôle Juridique & Fiscal</div>
+
+          <NavLink to="/legal-library" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
+            <Scale size={20} />
+            <span>Codes & OHADA</span>
+          </NavLink>
+
+          <NavLink to="/tax-incentives" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
+            <ShieldCheck size={20} />
+            <span>Simulateur Fiscal</span>
+          </NavLink>
+
+          <NavLink to="/compliance" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
+            <ClipboardCheck size={20} />
+            <span>Audit Conformité</span>
+          </NavLink>
+
+          <NavLink to="/legal-avatar" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
+            <Gavel size={20} />
+            <span>Avocat Conseil IA</span>
+          </NavLink>
+
         </nav>
       </aside>
       <div className="main-content" style={{ padding: 0, display: 'flex', flexDirection: 'column', height: '100vh' }}>
+        {/* Confidential Banner */}
+        <div style={{ background: '#ef4444', color: 'white', padding: '6px', textAlign: 'center', fontSize: '0.75rem', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '1px' }}>
+          ⚠️ PROTOTYPE CONFIDENTIEL - Réservé à l'usage exclusif de la Direction Générale de l'APIX et du Gouvernement. Ne pas distribuer.
+        </div>
         {/* TOPBAR INTERNATIONALE */}
-        <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem 2rem', background: 'white', borderBottom: '1px solid rgba(0,0,0,0.05)', height: '70px' }}>
+        <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem 2rem', background: 'white', borderBottom: '1px solid rgba(0,0,0,0.05)', height: '70px', flexShrink: 0 }}>
           
           <div style={{ display: 'flex', alignItems: 'center' }}>
             <button className="hamburger-btn" onClick={() => setIsMobileMenuOpen(true)}>
@@ -135,6 +312,10 @@ const SidebarLayout = () => {
               </select>
             </div>
 
+            <button onClick={toggleFullscreen} style={{ background: 'var(--bg-tertiary)', border: 'none', color: 'var(--text-secondary)', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', width: '36px', height: '36px', borderRadius: '50%' }}>
+              {isFullscreen ? <Minimize size={18} /> : <Maximize size={18} />}
+            </button>
+
             <div style={{ position: 'relative' }}>
               <div
                 onClick={() => setIsUserMenuOpen(prev => !prev)}
@@ -155,8 +336,10 @@ const SidebarLayout = () => {
           </div>
         </header>
 
-        <div className="main-content-scroll" style={{ padding: '2rem', height: 'calc(100vh - 70px)', overflowY: 'auto' }}>
-          <Outlet />
+        <div className="main-content-scroll" style={{ padding: '2rem', flex: 1, overflowY: 'auto' }}>
+          <div key={location.pathname} className="page-fade-in" style={{ height: '100%' }}>
+            <Outlet />
+          </div>
         </div>
       </div>
     </div>

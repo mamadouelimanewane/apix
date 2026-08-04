@@ -30,6 +30,32 @@ const RoiSimulator = React.lazy(() => import('./pages/RoiSimulator'))
 const Interoperability = React.lazy(() => import('./pages/Interoperability'))
 const OpenData = React.lazy(() => import('./pages/OpenData'))
 const Newsletter = React.lazy(() => import('./pages/Newsletter'))
+const GuichetUnique = React.lazy(() => import('./pages/GuichetUnique'))
+const LogisticsTracking = React.lazy(() => import('./pages/LogisticsTracking'))
+const BusinessPlanGenerator = React.lazy(() => import('./pages/BusinessPlanGenerator'))
+const VirtualTours = React.lazy(() => import('./pages/VirtualTours'))
+const FundingFinder = React.lazy(() => import('./pages/FundingFinder'))
+const EsgTracker = React.lazy(() => import('./pages/EsgTracker'))
+const InvestorEvents = React.lazy(() => import('./pages/InvestorEvents'))
+const CulturalGuide = React.lazy(() => import('./pages/CulturalGuide'))
+const JobBoard = React.lazy(() => import('./pages/JobBoard'))
+const WarRoom = React.lazy(() => import('./pages/WarRoom'))
+const AIAvatar = React.lazy(() => import('./pages/AIAvatar'))
+const SmartContracts = React.lazy(() => import('./pages/SmartContracts'))
+const SatelliteMap = React.lazy(() => import('./pages/SatelliteMap'))
+const BrownfieldMarket = React.lazy(() => import('./pages/BrownfieldMarket'))
+const LegalLibrary = React.lazy(() => import('./pages/LegalLibrary'))
+const TaxIncentives = React.lazy(() => import('./pages/TaxIncentives'))
+const ComplianceChecker = React.lazy(() => import('./pages/ComplianceChecker'))
+const LegalAvatar = React.lazy(() => import('./pages/LegalAvatar'))
+const MacroReports = React.lazy(() => import('./pages/MacroReports'))
+const FactorCosts = React.lazy(() => import('./pages/FactorCosts'))
+
+// Wow features
+const ZesExplorer = React.lazy(() => import('./pages/ZesExplorer'))
+const PitchDeckGenerator = React.lazy(() => import('./pages/PitchDeckGenerator'))
+const CarbonSimulator = React.lazy(() => import('./pages/CarbonSimulator'))
+const LiveTransparency = React.lazy(() => import('./pages/LiveTransparency'))
 
 const LoadingFallback = () => <div style={{ padding: '2rem', textAlign: 'center' }}>Chargement...</div>
 
@@ -58,6 +84,11 @@ function AppContent() {
             <Route path="interoperability" element={<Interoperability />} />
             <Route path="open-data" element={<OpenData />} />
             <Route path="newsletter" element={<Newsletter />} />
+
+            <Route path="macro-reports" element={<MacroReports />} />
+            <Route path="factor-costs" element={<FactorCosts />} />
+
+            <Route path="guichet-unique" element={<GuichetUnique />} />
             <Route path="track-record" element={<ApixTrackRecord />} />
             <Route path="roi-simulator" element={<RoiSimulator />} />
             <Route path="economy" element={<EconomyData />} />
@@ -75,6 +106,33 @@ function AppContent() {
             <Route path="portal" element={<Portal />} />
             <Route path="matchmaking" element={<Matchmaking />} />
             <Route path="aftercare" element={<Aftercare />} />
+            
+            <Route path="guichet-unique" element={<GuichetUnique />} />
+            <Route path="tracking" element={<LogisticsTracking />} />
+            <Route path="business-plan" element={<BusinessPlanGenerator />} />
+            <Route path="virtual-tours" element={<VirtualTours />} />
+            <Route path="funding" element={<FundingFinder />} />
+            <Route path="esg-tracker" element={<EsgTracker />} />
+            <Route path="events" element={<InvestorEvents />} />
+            <Route path="culture" element={<CulturalGuide />} />
+            <Route path="jobs" element={<JobBoard />} />
+
+            <Route path="war-room" element={<WarRoom />} />
+            <Route path="ai-avatar" element={<AIAvatar />} />
+            <Route path="smart-contracts" element={<SmartContracts />} />
+            <Route path="satellite" element={<SatelliteMap />} />
+            <Route path="brownfield" element={<BrownfieldMarket />} />
+
+            <Route path="legal-library" element={<LegalLibrary />} />
+            <Route path="tax-incentives" element={<TaxIncentives />} />
+            <Route path="compliance" element={<ComplianceChecker />} />
+            <Route path="legal-avatar" element={<LegalAvatar />} />
+            
+            {/* Wow Features */}
+            <Route path="zes-explorer" element={<ZesExplorer />} />
+            <Route path="pitch-deck" element={<PitchDeckGenerator />} />
+            <Route path="carbon-simulator" element={<CarbonSimulator />} />
+            <Route path="live-data" element={<LiveTransparency />} />
           </Route>
         </Routes>
       </Suspense>
