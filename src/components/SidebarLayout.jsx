@@ -224,9 +224,9 @@ const SidebarLayout = () => {
 
           <div style={{ fontSize: '0.75rem', textTransform: 'uppercase', color: '#f59e0b', marginTop: '1.5rem', marginBottom: '0.5rem', fontWeight: 'bold' }}>Innovation & DeepTech</div>
 
-          <NavLink to="/war-room" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`} style={({isActive}) => isActive ? {} : { color: '#60a5fa' }}>
+          <NavLink to={role === ROLES.AGENT ? "/deal-room-apix" : "/deal-room-investisseur"} className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`} style={({isActive}) => isActive ? {} : { color: '#60a5fa' }}>
             <TrendingUp size={20} />
-            <span>War Room Prédictif</span>
+            <span>Smart Deal Room</span>
           </NavLink>
 
           <NavLink to="/ai-avatar" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`} style={({isActive}) => isActive ? {} : { color: '#38bdf8' }}>
@@ -284,8 +284,8 @@ const SidebarLayout = () => {
       </aside>
       <div className="main-content" style={{ padding: 0, display: 'flex', flexDirection: 'column', height: '100vh' }}>
         {/* Confidential Banner */}
-        <div style={{ background: '#ef4444', color: 'white', padding: '6px', textAlign: 'center', fontSize: '0.75rem', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '1px' }}>
-          ⚠️ PROTOTYPE CONFIDENTIEL - Réservé à l'usage exclusif de la Direction Générale de l'APIX et du Gouvernement. Ne pas distribuer.
+        <div style={{ background: '#ef4444', color: 'white', padding: '6px', textAlign: 'center', fontSize: '0.75rem', fontWeight: 'bold', textTransform: 'uppercase', letterSpacing: '1px', overflow: 'hidden' }}>
+          <marquee scrollamount="6">⚠️ PROTOTYPE CONFIDENTIEL - Réservé à l'usage exclusif de la Direction Générale de l'APIX et du Gouvernement. Ne pas distribuer.</marquee>
         </div>
         {/* TOPBAR INTERNATIONALE */}
         <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem 2rem', background: 'white', borderBottom: '1px solid rgba(0,0,0,0.05)', height: '70px', flexShrink: 0 }}>

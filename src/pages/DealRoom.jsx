@@ -43,7 +43,7 @@ const downloadIcs = (booking) => {
   URL.revokeObjectURL(url);
 };
 
-const DealRoom = () => {
+const DealRoom = ({ mode = 'investor' }) => {
   const [isGenerating, setIsGenerating] = useState(false);
   const [generatedDoc, setGeneratedDoc] = useState(null);
   const [slots] = useState(generateSlots);
@@ -114,10 +114,11 @@ Fait à Dakar, le ${new Date().toLocaleDateString('fr-FR')}
         </div>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2rem' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: mode === 'apix' ? '1fr 1fr' : '1fr', gap: '2rem', maxWidth: mode === 'apix' ? '100%' : '800px', margin: mode === 'apix' ? '0' : '0 auto' }}>
         
-        {/* COLONNE GAUCHE: Formulaire IA */}
-        <div className="card" style={{ display: 'flex', flexDirection: 'column' }}>
+        {/* COLONNE GAUCHE: Formulaire IA (APIX ONLY) */}
+        {mode === 'apix' && (
+          <div className="card" style={{ display: 'flex', flexDirection: 'column' }}>
           <h3 style={{ margin: '0 0 1.5rem 0', color: 'var(--brand-blue)', display: 'flex', alignItems: 'center', gap: '8px' }}>
             <Brain size={24} color="var(--accent-primary)" /> Assistant Juridique IA (Term Sheet)
           </h3>
@@ -176,6 +177,7 @@ Fait à Dakar, le ${new Date().toLocaleDateString('fr-FR')}
             )}
           </button>
         </div>
+        )}
 
         {/* COLONNE DROITE: Document Généré & Data Room */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
@@ -213,10 +215,11 @@ Fait à Dakar, le ${new Date().toLocaleDateString('fr-FR')}
             </p>
           </div>
 
-          <div className="card">
-            <h3 style={{ margin: '0 0 1rem 0', color: 'var(--brand-blue)', fontSize: '1.1rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <CalendarClock size={20} /> Rendez-vous avec un Conseiller APIX
-            </h3>
+          {mode === 'investor' && (
+            <div className="card">
+              <h3 style={{ margin: '0 0 1rem 0', color: 'var(--brand-blue)', fontSize: '1.1rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <CalendarClock size={20} /> Rendez-vous avec un Conseiller APIX
+              </h3>
 
             {booking ? (
               <div style={{ background: 'rgba(0, 150, 57, 0.08)', border: '1px solid rgba(0, 150, 57, 0.3)', borderRadius: '8px', padding: '1.25rem' }}>
@@ -269,7 +272,8 @@ Fait à Dakar, le ${new Date().toLocaleDateString('fr-FR')}
                 </button>
               </>
             )}
-          </div>
+            </div>
+          )}
 
         </div>
       </div>

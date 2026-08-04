@@ -88,7 +88,8 @@ function AppContent() {
           <Route path="/" element={<SidebarLayout />}>
             <Route index element={<Dashboard />} />
             <Route path="executive" element={<RequireRole roles={['agent']}><ExecutiveBoard /></RequireRole>} />
-            <Route path="deal-room" element={<RequireRole roles={['agent']}><DealRoom /></RequireRole>} />
+            <Route path="deal-room-apix" element={<RequireRole roles={['agent']}><DealRoom mode="apix" /></RequireRole>} />
+            <Route path="deal-room-investisseur" element={<DealRoom mode="investor" />} />
             <Route path="digital-twin" element={<DigitalTwin />} />
             <Route path="interoperability" element={<Interoperability />} />
             <Route path="open-data" element={<OpenData />} />
