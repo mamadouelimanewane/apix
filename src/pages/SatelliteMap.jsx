@@ -5,10 +5,22 @@ const SatelliteMap = () => {
   return (
     <div className="page-container" style={{ display: 'flex', flexDirection: 'column', height: 'calc(100vh - 100px)' }}>
       <div style={{ marginBottom: '1rem' }}>
-        <h1 className="page-title" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+        
+        <div className="global-page-banner">
+          <div className="banner-decor-1"></div>
+          <div className="banner-decor-2"></div>
+          <div className="banner-content">
+            <h1 className="page-title" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              
           <Satellite size={32} color="#0284c7" /> APIX Earth : Observation Satellitaire
-        </h1>
-        <p className="page-subtitle">Surveillance en temps réel des chantiers industriels via imagerie satellite (Copernicus/Sentinel).</p>
+        
+            </h1>
+            <p className="page-subtitle">
+              Surveillance en temps réel des chantiers industriels via imagerie satellite (Copernicus/Sentinel).
+            </p>
+          </div>
+        </div>
+    
       </div>
 
       <div className="card" style={{ flex: 1, padding: 0, position: 'relative', overflow: 'hidden', borderRadius: '12px', border: '1px solid rgba(0,0,0,0.1)' }}>

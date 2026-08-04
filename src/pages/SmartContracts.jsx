@@ -11,10 +11,22 @@ const SmartContracts = () => {
   return (
     <div className="page-container" style={{ background: '#f8fafc' }}>
       <div style={{ marginBottom: '2rem' }}>
-        <h1 className="page-title" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+        
+        <div className="global-page-banner">
+          <div className="banner-decor-1"></div>
+          <div className="banner-decor-2"></div>
+          <div className="banner-content">
+            <h1 className="page-title" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              
           <Hexagon size={32} color="#8b5cf6" /> Blockchain & Smart Contracts
-        </h1>
-        <p className="page-subtitle">Registre décentralisé, immuable et transparent pour sécuriser les conventions d'investissement de l'État du Sénégal.</p>
+        
+            </h1>
+            <p className="page-subtitle">
+              Registre décentralisé, immuable et transparent pour sécuriser les conventions d'investissement de l'État du Sénégal.
+            </p>
+          </div>
+        </div>
+    
       </div>
 
       <div className="responsive-grid responsive-grid-3" style={{ marginBottom: '2rem' }}>

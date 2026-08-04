@@ -11,10 +11,22 @@ const BrownfieldMarket = () => {
   return (
     <div className="page-container">
       <div style={{ marginBottom: '2rem' }}>
-        <h1 className="page-title" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+        
+        <div className="global-page-banner">
+          <div className="banner-decor-1"></div>
+          <div className="banner-decor-2"></div>
+          <div className="banner-content">
+            <h1 className="page-title" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              
           <Factory size={32} color="#f97316" /> Marketplace des Actifs Industriels (Brownfield)
-        </h1>
-        <p className="page-subtitle">Recyclez des friches industrielles et usines à l'arrêt pour implanter votre entreprise 2x plus vite.</p>
+        
+            </h1>
+            <p className="page-subtitle">
+              Recyclez des friches industrielles et usines à l'arrêt pour implanter votre entreprise 2x plus vite.
+            </p>
+          </div>
+        </div>
+    
       </div>
 
       <div className="card" style={{ marginBottom: '2rem', display: 'flex', gap: '1rem', alignItems: 'center' }}>

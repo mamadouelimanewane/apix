@@ -37,8 +37,20 @@ const Map = () => {
     <div className="map-page" style={{ height: 'calc(100vh - 4rem)' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
         <div>
-          <h1 className="page-title" style={{ fontSize: '1.8rem' }}>Cartographie SIG Nationale</h1>
-          <p className="page-subtitle" style={{ marginBottom: '0.5rem' }}>Vue macroscopique des zones d'investissements, agropoles, infrastructures et ressources du Sénégal.</p>
+          
+        <div className="global-page-banner">
+          <div className="banner-decor-1"></div>
+          <div className="banner-decor-2"></div>
+          <div className="banner-content">
+            <h1 className="page-title" style={{ fontSize: '1.8rem' }}>
+              Cartographie SIG Nationale
+            </h1>
+            <p className="page-subtitle" style={{ marginBottom: '0.5rem' }}>
+              Vue macroscopique des zones d'investissements, agropoles, infrastructures et ressources du Sénégal.
+            </p>
+          </div>
+        </div>
+    
         </div>
       </div>
       

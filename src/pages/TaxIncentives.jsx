@@ -9,10 +9,22 @@ const TaxIncentives = () => {
   return (
     <div className="page-container">
       <div style={{ marginBottom: '2rem' }}>
-        <h1 className="page-title" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+        
+        <div className="global-page-banner">
+          <div className="banner-decor-1"></div>
+          <div className="banner-decor-2"></div>
+          <div className="banner-content">
+            <h1 className="page-title" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              
           <ShieldCheck size={32} color="#10b981" /> Simulateur de Bouclier Fiscal
-        </h1>
-        <p className="page-subtitle">Calculez instantanément les exonérations et avantages fiscaux auxquels votre projet est éligible.</p>
+        
+            </h1>
+            <p className="page-subtitle">
+              Calculez instantanément les exonérations et avantages fiscaux auxquels votre projet est éligible.
+            </p>
+          </div>
+        </div>
+    
       </div>
 
       <div className="responsive-grid responsive-grid-1-2">

@@ -6,8 +6,20 @@ const LifeQuality = () => {
     <div className="life-page">
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
         <div>
-          <h1 className="page-title">Cadre de Vie & Soft Power</h1>
-          <p className="page-subtitle">S'installer au Sénégal : Un environnement exceptionnel pour vous et vos équipes.</p>
+          
+        <div className="global-page-banner">
+          <div className="banner-decor-1"></div>
+          <div className="banner-decor-2"></div>
+          <div className="banner-content">
+            <h1 className="page-title">
+              Cadre de Vie & Soft Power
+            </h1>
+            <p className="page-subtitle">
+              S'installer au Sénégal : Un environnement exceptionnel pour vous et vos équipes.
+            </p>
+          </div>
+        </div>
+    
         </div>
       </div>
 

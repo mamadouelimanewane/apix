@@ -22,10 +22,22 @@ const ApixTrackRecord = () => {
   return (
     <div className="track-record-page" style={{ paddingBottom: '2rem' }}>
       <div style={{ marginBottom: '2rem' }}>
-        <h1 className="page-title" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+        
+        <div className="global-page-banner">
+          <div className="banner-decor-1"></div>
+          <div className="banner-decor-2"></div>
+          <div className="banner-content">
+            <h1 className="page-title" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              
           <Award size={32} color="var(--brand-blue)" /> Track Record & Parcours Investisseur
-        </h1>
-        <p className="page-subtitle">Découvrez l'héritage des grands travaux de l'APIX et notre méthodologie d'accompagnement de A à Z.</p>
+        
+            </h1>
+            <p className="page-subtitle">
+              Découvrez l'héritage des grands travaux de l'APIX et notre méthodologie d'accompagnement de A à Z.
+            </p>
+          </div>
+        </div>
+    
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '2.5rem' }}>

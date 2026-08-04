@@ -57,10 +57,22 @@ const Aftercare = () => {
   return (
     <div className="aftercare-page">
       <div style={{ marginBottom: '2rem' }}>
-        <h1 className="page-title" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+        
+        <div className="global-page-banner">
+          <div className="banner-decor-1"></div>
+          <div className="banner-decor-2"></div>
+          <div className="banner-content">
+            <h1 className="page-title" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              
           <HeadphonesIcon size={32} color="var(--brand-blue)" /> Investor Aftercare & Support
-        </h1>
-        <p className="page-subtitle">Gérez vos requêtes administratives post-installation et participez à l'amélioration du climat des affaires.</p>
+        
+            </h1>
+            <p className="page-subtitle">
+              Gérez vos requêtes administratives post-installation et participez à l'amélioration du climat des affaires.
+            </p>
+          </div>
+        </div>
+    
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 3fr', gap: '2rem' }}>

@@ -11,10 +11,22 @@ const FundingFinder = () => {
   return (
     <div className="page-container">
       <div style={{ marginBottom: '2rem' }}>
-        <h1 className="page-title" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+        
+        <div className="global-page-banner">
+          <div className="banner-decor-1"></div>
+          <div className="banner-decor-2"></div>
+          <div className="banner-content">
+            <h1 className="page-title" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              
           <DollarSign size={32} color="var(--brand-blue)" /> Simulateur de Financements
-        </h1>
-        <p className="page-subtitle">Trouvez les aides de l'État, fonds verts et financements institutionnels adaptés à votre projet.</p>
+        
+            </h1>
+            <p className="page-subtitle">
+              Trouvez les aides de l'État, fonds verts et financements institutionnels adaptés à votre projet.
+            </p>
+          </div>
+        </div>
+    
       </div>
 
       <div className="card" style={{ marginBottom: '2rem', display: 'flex', gap: '1rem', alignItems: 'flex-end' }}>

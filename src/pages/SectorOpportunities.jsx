@@ -86,10 +86,22 @@ const SectorOpportunities = () => {
   return (
     <div className="opportunities-page">
       <div style={{ marginBottom: '2rem' }}>
-        <h1 className="page-title" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+        
+        <div className="global-page-banner">
+          <div className="banner-decor-1"></div>
+          <div className="banner-decor-2"></div>
+          <div className="banner-content">
+            <h1 className="page-title" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              
           <Briefcase size={32} color="var(--brand-blue)" /> Opportunités & Secteurs
-        </h1>
-        <p className="page-subtitle">Découvrez les secteurs prioritaires du PSE et les projets PPP prêts à l'investissement.</p>
+        
+            </h1>
+            <p className="page-subtitle">
+              Découvrez les secteurs prioritaires du PSE et les projets PPP prêts à l'investissement.
+            </p>
+          </div>
+        </div>
+    
       </div>
 
       <h2 style={{ fontSize: '1.4rem', color: 'var(--brand-blue)', marginBottom: '1.5rem', display: 'flex', alignItems: 'center', gap: '8px' }}>

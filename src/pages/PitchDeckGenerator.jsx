@@ -20,10 +20,22 @@ const PitchDeckGenerator = () => {
   return (
     <div className="page-container page-fade-in" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
       <div style={{ marginBottom: '2rem' }}>
-        <h1 className="page-title" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+        
+        <div className="global-page-banner">
+          <div className="banner-decor-1"></div>
+          <div className="banner-decor-2"></div>
+          <div className="banner-content">
+            <h1 className="page-title" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              
           <Presentation size={32} color="var(--brand-blue)" /> Générateur de Pitch Deck IA
-        </h1>
-        <p className="page-subtitle">Générez un argumentaire exécutif "Prêt pour le Board" basé sur vos critères d'investissement.</p>
+        
+            </h1>
+            <p className="page-subtitle">
+              Générez un argumentaire exécutif "Prêt pour le Board" basé sur vos critères d'investissement.
+            </p>
+          </div>
+        </div>
+    
       </div>
 
       <div style={{ display: 'flex', gap: '30px', flex: 1 }}>

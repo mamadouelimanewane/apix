@@ -41,8 +41,20 @@ const SiteSelector = () => {
     <div className="site-selector-page" style={{ height: 'calc(100vh - 4rem)', display: 'flex', flexDirection: 'column' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
         <div>
-          <h1 className="page-title" style={{ fontSize: '1.8rem' }}>Smart Site Selector</h1>
-          <p className="page-subtitle" style={{ marginBottom: '0.5rem' }}>Identifiez la zone industrielle optimale selon vos critères opérationnels.</p>
+          
+        <div className="global-page-banner">
+          <div className="banner-decor-1"></div>
+          <div className="banner-decor-2"></div>
+          <div className="banner-content">
+            <h1 className="page-title" style={{ fontSize: '1.8rem' }}>
+              Smart Site Selector
+            </h1>
+            <p className="page-subtitle" style={{ marginBottom: '0.5rem' }}>
+              Identifiez la zone industrielle optimale selon vos critères opérationnels.
+            </p>
+          </div>
+        </div>
+    
         </div>
       </div>
       

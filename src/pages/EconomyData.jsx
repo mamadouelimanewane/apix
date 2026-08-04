@@ -47,8 +47,20 @@ const EconomyData = () => {
     <div className="economy-page">
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
         <div>
-          <h1 className="page-title">Économie & Facteurs de Production</h1>
-          <p className="page-subtitle">Données macroéconomiques et coûts opérationnels au Sénégal.</p>
+          
+        <div className="global-page-banner">
+          <div className="banner-decor-1"></div>
+          <div className="banner-decor-2"></div>
+          <div className="banner-content">
+            <h1 className="page-title">
+              Économie & Facteurs de Production
+            </h1>
+            <p className="page-subtitle">
+              Données macroéconomiques et coûts opérationnels au Sénégal.
+            </p>
+          </div>
+        </div>
+    
         </div>
       </div>
 

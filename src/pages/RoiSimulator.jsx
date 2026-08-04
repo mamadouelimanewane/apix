@@ -41,10 +41,22 @@ const RoiSimulator = () => {
     <div className="roi-simulator-page">
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
         <div>
-          <h1 className="page-title" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          
+        <div className="global-page-banner">
+          <div className="banner-decor-1"></div>
+          <div className="banner-decor-2"></div>
+          <div className="banner-content">
+            <h1 className="page-title" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              
             <Calculator size={32} color="var(--accent-primary)" /> {t('roi.title')}
-          </h1>
-          <p className="page-subtitle">{t('roi.subtitle')}</p>
+          
+            </h1>
+            <p className="page-subtitle">
+              {t('roi.subtitle')}
+            </p>
+          </div>
+        </div>
+    
         </div>
       </div>
 

@@ -26,10 +26,22 @@ const LiveTransparency = () => {
     <div className="page-container page-fade-in" style={{ height: 'calc(100vh - 80px)', display: 'flex', flexDirection: 'column' }}>
       <div style={{ marginBottom: '2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
         <div>
-          <h1 className="page-title" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          
+        <div className="global-page-banner">
+          <div className="banner-decor-1"></div>
+          <div className="banner-decor-2"></div>
+          <div className="banner-content">
+            <h1 className="page-title" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              
             <Activity size={32} color="#ef4444" /> Live Data APIX
-          </h1>
-          <p className="page-subtitle">Transparence absolue : Suivez l'activité de l'Agence et du Guichet Unique en temps réel.</p>
+          
+            </h1>
+            <p className="page-subtitle">
+              Transparence absolue : Suivez l'activité de l'Agence et du Guichet Unique en temps réel.
+            </p>
+          </div>
+        </div>
+    
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px', background: 'rgba(239, 68, 68, 0.1)', color: '#ef4444', padding: '8px 15px', borderRadius: '20px', fontSize: '0.9rem', fontWeight: 'bold' }}>
           <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#ef4444', animation: 'pulse 2s infinite' }}></div>

@@ -94,10 +94,22 @@ const RoadmapBuilder = () => {
   return (
     <div className="roadmap-page">
       <div style={{ marginBottom: '2rem' }}>
-        <h1 className="page-title" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+        
+        <div className="global-page-banner">
+          <div className="banner-decor-1"></div>
+          <div className="banner-decor-2"></div>
+          <div className="banner-content">
+            <h1 className="page-title" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              
           <RouteIcon size={32} color="var(--brand-blue)" /> Générateur de Roadmap IA
-        </h1>
-        <p className="page-subtitle">Générez un parcours d'implantation personnalisé avec coûts et délais pour votre projet.</p>
+        
+            </h1>
+            <p className="page-subtitle">
+              Générez un parcours d'implantation personnalisé avec coûts et délais pour votre projet.
+            </p>
+          </div>
+        </div>
+    
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: '2rem' }}>

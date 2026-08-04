@@ -13,10 +13,22 @@ const VirtualTours = () => {
   return (
     <div className="page-container">
       <div style={{ marginBottom: '2rem' }}>
-        <h1 className="page-title" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+        
+        <div className="global-page-banner">
+          <div className="banner-decor-1"></div>
+          <div className="banner-decor-2"></div>
+          <div className="banner-content">
+            <h1 className="page-title" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              
           <View size={32} color="var(--brand-blue)" /> Visites Virtuelles (360° & VR)
-        </h1>
-        <p className="page-subtitle">Explorez les Zones Économiques Spéciales du Sénégal comme si vous y étiez.</p>
+        
+            </h1>
+            <p className="page-subtitle">
+              Explorez les Zones Économiques Spéciales du Sénégal comme si vous y étiez.
+            </p>
+          </div>
+        </div>
+    
       </div>
 
       <div style={{ display: 'flex', gap: '1rem', marginBottom: '2rem' }}>

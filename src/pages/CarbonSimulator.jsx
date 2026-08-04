@@ -15,10 +15,22 @@ const CarbonSimulator = () => {
   return (
     <div className="page-container page-fade-in">
       <div style={{ marginBottom: '2rem' }}>
-        <h1 className="page-title" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+        
+        <div className="global-page-banner">
+          <div className="banner-decor-1"></div>
+          <div className="banner-decor-2"></div>
+          <div className="banner-content">
+            <h1 className="page-title" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              
           <Leaf size={32} color="#10b981" /> Simulateur ESG & Carbone
-        </h1>
-        <p className="page-subtitle">Évaluez la réduction de votre empreinte carbone grâce au mix énergétique durable du Sénégal (Gas-to-Power & EnR).</p>
+        
+            </h1>
+            <p className="page-subtitle">
+              Évaluez la réduction de votre empreinte carbone grâce au mix énergétique durable du Sénégal (Gas-to-Power & EnR).
+            </p>
+          </div>
+        </div>
+    
       </div>
 
       <div className="responsive-grid responsive-grid-2">

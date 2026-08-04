@@ -11,10 +11,22 @@ const JobBoard = () => {
   return (
     <div className="page-container">
       <div style={{ marginBottom: '2rem' }}>
-        <h1 className="page-title" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+        
+        <div className="global-page-banner">
+          <div className="banner-decor-1"></div>
+          <div className="banner-decor-2"></div>
+          <div className="banner-content">
+            <h1 className="page-title" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              
           <Briefcase size={32} color="var(--brand-blue)" /> Bourse des Talents & Recrutement
-        </h1>
-        <p className="page-subtitle">Trouvez les meilleurs talents locaux et issus de la diaspora pour accompagner votre implantation.</p>
+        
+            </h1>
+            <p className="page-subtitle">
+              Trouvez les meilleurs talents locaux et issus de la diaspora pour accompagner votre implantation.
+            </p>
+          </div>
+        </div>
+    
       </div>
 
       <div className="card" style={{ marginBottom: '2rem', display: 'flex', gap: '1rem' }}>

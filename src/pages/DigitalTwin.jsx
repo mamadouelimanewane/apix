@@ -55,10 +55,22 @@ const DigitalTwin = () => {
     <div className="digital-twin-page" style={{ height: 'calc(100vh - 4rem)' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
         <div>
-          <h1 className="page-title" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          
+        <div className="global-page-banner">
+          <div className="banner-decor-1"></div>
+          <div className="banner-decor-2"></div>
+          <div className="banner-content">
+            <h1 className="page-title" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              
             <Layers size={32} color="var(--brand-blue)" /> Jumeau Numérique - ZES
-          </h1>
-          <p className="page-subtitle">Gestion foncière interactive en temps réel du Parc des Technologies Numériques (PTN) de Diamniadio.</p>
+          
+            </h1>
+            <p className="page-subtitle">
+              Gestion foncière interactive en temps réel du Parc des Technologies Numériques (PTN) de Diamniadio.
+            </p>
+          </div>
+        </div>
+    
         </div>
         <div style={{ display: 'flex', gap: '10px' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.85rem' }}>

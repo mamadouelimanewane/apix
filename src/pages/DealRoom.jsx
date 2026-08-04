@@ -104,10 +104,22 @@ Fait à Dakar, le ${new Date().toLocaleDateString('fr-FR')}
     <div className="deal-room-page">
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
         <div>
-          <h1 className="page-title" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          
+        <div className="global-page-banner">
+          <div className="banner-decor-1"></div>
+          <div className="banner-decor-2"></div>
+          <div className="banner-content">
+            <h1 className="page-title" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              
             <Lock size={32} color="#e31b23" /> Smart Deal Room & VDR
-          </h1>
-          <p className="page-subtitle">Espace ultra-sécurisé de négociation (Virtual Data Room) et génération de contrats assistée par IA.</p>
+          
+            </h1>
+            <p className="page-subtitle">
+              Espace ultra-sécurisé de négociation (Virtual Data Room) et génération de contrats assistée par IA.
+            </p>
+          </div>
+        </div>
+    
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', background: 'rgba(227, 27, 35, 0.1)', color: '#e31b23', padding: '8px 16px', borderRadius: '20px', fontWeight: 'bold' }}>
           <Shield size={18} /> Chiffrement AES-256

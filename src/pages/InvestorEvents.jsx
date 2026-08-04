@@ -11,10 +11,22 @@ const InvestorEvents = () => {
   return (
     <div className="page-container">
       <div style={{ marginBottom: '2rem' }}>
-        <h1 className="page-title" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+        
+        <div className="global-page-banner">
+          <div className="banner-decor-1"></div>
+          <div className="banner-decor-2"></div>
+          <div className="banner-content">
+            <h1 className="page-title" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              
           <Calendar size={32} color="var(--brand-blue)" /> Événements & Communauté
-        </h1>
-        <p className="page-subtitle">Participez à nos webinaires, forums d'investissement et développez votre réseau au Sénégal.</p>
+        
+            </h1>
+            <p className="page-subtitle">
+              Participez à nos webinaires, forums d'investissement et développez votre réseau au Sénégal.
+            </p>
+          </div>
+        </div>
+    
       </div>
 
       <div className="responsive-grid responsive-grid-3">

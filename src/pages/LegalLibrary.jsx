@@ -100,10 +100,22 @@ const LegalLibrary = () => {
   return (
     <div className="page-container">
       <div style={{ marginBottom: '2rem' }}>
-        <h1 className="page-title" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+        
+        <div className="global-page-banner">
+          <div className="banner-decor-1"></div>
+          <div className="banner-decor-2"></div>
+          <div className="banner-content">
+            <h1 className="page-title" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              
           <Book size={32} color="var(--brand-blue)" /> Bibliothèque Juridique Intelligente
-        </h1>
-        <p className="page-subtitle">Accédez aux textes de lois, codes et actes uniformes avec des résumés clairs pour les investisseurs.</p>
+        
+            </h1>
+            <p className="page-subtitle">
+              Accédez aux textes de lois, codes et actes uniformes avec des résumés clairs pour les investisseurs.
+            </p>
+          </div>
+        </div>
+    
       </div>
 
       <div className="card" style={{ marginBottom: '2rem', display: 'flex', alignItems: 'center', gap: '15px' }}>

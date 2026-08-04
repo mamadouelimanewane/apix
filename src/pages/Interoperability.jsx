@@ -64,10 +64,22 @@ const Interoperability = () => {
   return (
     <div className="interoperability-page">
       <div style={{ marginBottom: '2rem' }}>
-        <h1 className="page-title" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+        
+        <div className="global-page-banner">
+          <div className="banner-decor-1"></div>
+          <div className="banner-decor-2"></div>
+          <div className="banner-content">
+            <h1 className="page-title" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              
           <Network size={32} color="var(--brand-blue)" /> Interopérabilité Inter-Administrations
-        </h1>
-        <p className="page-subtitle">Échange sécurisé de données en temps réel avec les systèmes d'information des administrations partenaires (architecture inspirée du modèle X-Road).</p>
+        
+            </h1>
+            <p className="page-subtitle">
+              Échange sécurisé de données en temps réel avec les systèmes d'information des administrations partenaires (architecture inspirée du modèle X-Road).
+            </p>
+          </div>
+        </div>
+    
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1.5rem', marginBottom: '2rem' }}>

@@ -15,10 +15,22 @@ const GuichetUnique = () => {
   return (
     <div className="page-container">
       <div style={{ marginBottom: '2rem' }}>
-        <h1 className="page-title" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+        
+        <div className="global-page-banner">
+          <div className="banner-decor-1"></div>
+          <div className="banner-decor-2"></div>
+          <div className="banner-content">
+            <h1 className="page-title" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              
           <Building2 size={32} color="var(--brand-blue)" /> Guichet Unique Dématérialisé
-        </h1>
-        <p className="page-subtitle">Créez votre entreprise au Sénégal, obtenez votre NINEA et votre RCCM en 48 heures, 100% en ligne.</p>
+        
+            </h1>
+            <p className="page-subtitle">
+              Créez votre entreprise au Sénégal, obtenez votre NINEA et votre RCCM en 48 heures, 100% en ligne.
+            </p>
+          </div>
+        </div>
+    
       </div>
 
       <div className="card" style={{ marginBottom: '2rem', padding: '2rem' }}>

@@ -29,10 +29,22 @@ const ZesExplorer = () => {
   return (
     <div className="page-container page-fade-in" style={{ height: 'calc(100vh - 80px)', display: 'flex', flexDirection: 'column' }}>
       <div style={{ marginBottom: '2rem' }}>
-        <h1 className="page-title" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+        
+        <div className="global-page-banner">
+          <div className="banner-decor-1"></div>
+          <div className="banner-decor-2"></div>
+          <div className="banner-content">
+            <h1 className="page-title" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              
           <Map size={32} color="var(--brand-blue)" /> Cadastre Industriel Interactif
-        </h1>
-        <p className="page-subtitle">Explorez les parcelles disponibles dans les Zones Économiques Spéciales en temps réel.</p>
+        
+            </h1>
+            <p className="page-subtitle">
+              Explorez les parcelles disponibles dans les Zones Économiques Spéciales en temps réel.
+            </p>
+          </div>
+        </div>
+    
       </div>
 
       <div style={{ display: 'flex', gap: '20px', flex: 1, overflow: 'hidden' }}>

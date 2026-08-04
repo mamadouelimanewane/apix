@@ -34,10 +34,22 @@ const Newsletter = () => {
   return (
     <div className="newsletter-page">
       <div style={{ marginBottom: '2rem' }}>
-        <h1 className="page-title" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+        
+        <div className="global-page-banner">
+          <div className="banner-decor-1"></div>
+          <div className="banner-decor-2"></div>
+          <div className="banner-content">
+            <h1 className="page-title" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              
           <Newspaper size={32} color="var(--brand-blue)" /> Sénégal Invest Brief
-        </h1>
-        <p className="page-subtitle">Newsletter économique et financière bi-mensuelle sur le Sénégal, à destination des investisseurs. Recherche et rédaction assistées par IA, sources publiques citées à chaque numéro.</p>
+        
+            </h1>
+            <p className="page-subtitle">
+              Newsletter économique et financière bi-mensuelle sur le Sénégal, à destination des investisseurs. Recherche et rédaction assistées par IA, sources publiques citées à chaque numéro.
+            </p>
+          </div>
+        </div>
+    
       </div>
 
       <div className="card" style={{ background: 'linear-gradient(135deg, var(--brand-blue) 0%, #004b2c 100%)', color: 'white', marginBottom: '2rem', padding: '2rem' }}>

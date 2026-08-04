@@ -108,10 +108,22 @@ const OpenData = () => {
   return (
     <div className="opendata-page">
       <div style={{ marginBottom: '2rem' }}>
-        <h1 className="page-title" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+        
+        <div className="global-page-banner">
+          <div className="banner-decor-1"></div>
+          <div className="banner-decor-2"></div>
+          <div className="banner-content">
+            <h1 className="page-title" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              
           <Database size={32} color="var(--brand-blue)" /> Portail Open Data
-        </h1>
-        <p className="page-subtitle">Données économiques publiques du Sénégal, en libre consultation et téléchargement pour chercheurs et analystes.</p>
+        
+            </h1>
+            <p className="page-subtitle">
+              Données économiques publiques du Sénégal, en libre consultation et téléchargement pour chercheurs et analystes.
+            </p>
+          </div>
+        </div>
+    
       </div>
 
       <div className="card" style={{ marginBottom: '2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>

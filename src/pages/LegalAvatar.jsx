@@ -36,10 +36,22 @@ const LegalAvatar = () => {
   return (
     <div className="page-container" style={{ display: 'flex', flexDirection: 'column', height: 'calc(100vh - 100px)' }}>
       <div style={{ marginBottom: '1rem' }}>
-        <h1 className="page-title" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+        
+        <div className="global-page-banner">
+          <div className="banner-decor-1"></div>
+          <div className="banner-decor-2"></div>
+          <div className="banner-content">
+            <h1 className="page-title" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              
           <Gavel size={32} color="#0284c7" /> Robo-Avocat (Avatar Juridique)
-        </h1>
-        <p className="page-subtitle">Obtenez des réponses instantanées et sourcées sur la fiscalité et le droit OHADA.</p>
+        
+            </h1>
+            <p className="page-subtitle">
+              Obtenez des réponses instantanées et sourcées sur la fiscalité et le droit OHADA.
+            </p>
+          </div>
+        </div>
+    
       </div>
 
       <div className="responsive-grid responsive-grid-2" style={{ flex: 1, overflow: 'hidden' }}>

@@ -7,10 +7,22 @@ const CulturalGuide = () => {
   return (
     <div className="page-container">
       <div style={{ marginBottom: '2rem' }}>
-        <h1 className="page-title" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+        
+        <div className="global-page-banner">
+          <div className="banner-decor-1"></div>
+          <div className="banner-decor-2"></div>
+          <div className="banner-content">
+            <h1 className="page-title" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              
           <BookOpen size={32} color="var(--brand-blue)" /> Guide Pratique "Doing Business"
-        </h1>
-        <p className="page-subtitle">Découvrez l'étiquette des affaires, la culture du travail et les astuces pour une intégration réussie au Sénégal.</p>
+        
+            </h1>
+            <p className="page-subtitle">
+              Découvrez l'étiquette des affaires, la culture du travail et les astuces pour une intégration réussie au Sénégal.
+            </p>
+          </div>
+        </div>
+    
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 3fr', gap: '2rem' }}>

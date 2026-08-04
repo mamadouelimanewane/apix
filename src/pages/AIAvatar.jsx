@@ -25,10 +25,22 @@ const AIAvatar = () => {
   return (
     <div className="page-container" style={{ display: 'flex', flexDirection: 'column', height: 'calc(100vh - 100px)' }}>
       <div style={{ marginBottom: '1rem' }}>
-        <h1 className="page-title" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+        
+        <div className="global-page-banner">
+          <div className="banner-decor-1"></div>
+          <div className="banner-decor-2"></div>
+          <div className="banner-content">
+            <h1 className="page-title" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              
           <Bot size={32} color="var(--brand-blue)" /> Concierge IA Multilingue (3D)
-        </h1>
-        <p className="page-subtitle">Discutez naturellement à la voix avec l'intelligence artificielle de l'APIX.</p>
+        
+            </h1>
+            <p className="page-subtitle">
+              Discutez naturellement à la voix avec l'intelligence artificielle de l'APIX.
+            </p>
+          </div>
+        </div>
+    
       </div>
 
       <div className="responsive-grid responsive-grid-2" style={{ flex: 1 }}>

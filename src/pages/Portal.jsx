@@ -67,8 +67,20 @@ const Portal = () => {
     <div className="portal-page">
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
         <div>
-          <h1 className="page-title">E-Guichet Unique</h1>
-          <p className="page-subtitle">Gérez vos dossiers de création, agréments et correspondances.</p>
+          
+        <div className="global-page-banner">
+          <div className="banner-decor-1"></div>
+          <div className="banner-decor-2"></div>
+          <div className="banner-content">
+            <h1 className="page-title">
+              E-Guichet Unique
+            </h1>
+            <p className="page-subtitle">
+              Gérez vos dossiers de création, agréments et correspondances.
+            </p>
+          </div>
+        </div>
+    
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px', background: 'var(--bg-secondary)', padding: '8px 16px', borderRadius: 'var(--radius-full)', boxShadow: 'var(--shadow-sm)' }}>
           <UserCircle size={24} color="var(--brand-blue)" />

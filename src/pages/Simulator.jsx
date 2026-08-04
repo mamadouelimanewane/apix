@@ -82,8 +82,20 @@ const Simulator = () => {
     <div className="simulator-page">
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
         <div>
-          <h1 className="page-title">Simulateur de Coûts & ROI</h1>
-          <p className="page-subtitle">Connecté aux données réelles des facteurs de production.</p>
+          
+        <div className="global-page-banner">
+          <div className="banner-decor-1"></div>
+          <div className="banner-decor-2"></div>
+          <div className="banner-content">
+            <h1 className="page-title">
+              Simulateur de Coûts & ROI
+            </h1>
+            <p className="page-subtitle">
+              Connecté aux données réelles des facteurs de production.
+            </p>
+          </div>
+        </div>
+    
         </div>
         <button className="btn-primary" onClick={handleExport} disabled={isExporting} style={{ background: isExporting ? 'var(--text-muted)' : 'var(--brand-blue)' }}>
           {isExporting ? <span className="typing-dot" style={{ width: '10px', height: '10px', background: 'white', borderRadius: '50%', animation: 'blink 1.4s infinite both' }}></span> : <Download size={18} />}
