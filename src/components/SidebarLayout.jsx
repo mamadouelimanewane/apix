@@ -81,7 +81,7 @@ const SidebarLayout = () => {
 
           <NavLink to="/portail-bureau" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
             <Landmark size={20} />
-            <span>Portail Bureau</span>
+            <span>Bureau Exécutif</span>
           </NavLink>
 
           <div style={{ fontSize: '0.75rem', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', marginTop: '1.5rem', marginBottom: '0.5rem', fontWeight: 'bold' }}>{t('sidebar.discover_apix')}</div>

@@ -19,10 +19,10 @@ const PortailBureau = () => {
         
         <div style={{ position: 'relative', zIndex: 1, maxWidth: '1000px' }}>
           <h1 style={{ fontSize: '3rem', fontWeight: '800', margin: '0 0 1rem 0', letterSpacing: '-1px' }}>
-            Le Bureau de l'Assemblée
+            Bureau Exécutif de l'APIX
           </h1>
           <p style={{ fontSize: '1.2rem', lineHeight: '1.6', opacity: 0.9, maxWidth: '800px', margin: 0 }}>
-            Centre de commandement exécutif de l'institution. Conférence des Présidents, gestion des Groupes, supervision des Commissions et de l'Agenda législatif.
+            Centre de pilotage stratégique de l'institution. Coordination des investissements, supervision des grands travaux, et gestion des Zones Économiques Spéciales (ZES).
           </p>
         </div>
       </div>
@@ -37,9 +37,9 @@ const PortailBureau = () => {
               <div style={{ background: '#eff6ff', padding: '15px', borderRadius: '12px', color: '#3b82f6' }}>
                 <Users size={28} />
               </div>
-              <h2 style={{ margin: 0, fontSize: '1.3rem', color: '#1e293b' }}>Conférence des Présidents</h2>
+              <h2 style={{ margin: 0, fontSize: '1.3rem', color: '#1e293b' }}>Comité des Investissements</h2>
             </div>
-            <p style={{ color: '#64748b', margin: '0 0 1.5rem 0', lineHeight: '1.5' }}>Fixation de l'ordre du jour, répartition des temps de parole et organisation des débats.</p>
+            <p style={{ color: '#64748b', margin: '0 0 1.5rem 0', lineHeight: '1.5' }}>Validation des projets stratégiques, attribution des agréments et suivi des IDE.</p>
             <button style={{ width: '100%', padding: '12px', background: '#f1f5f9', border: 'none', borderRadius: '8px', color: '#334155', fontWeight: 'bold', cursor: 'pointer' }}>Accéder à la salle virtuelle</button>
           </div>
 
@@ -48,9 +48,9 @@ const PortailBureau = () => {
               <div style={{ background: '#ecfdf5', padding: '15px', borderRadius: '12px', color: '#10b981' }}>
                 <Gavel size={28} />
               </div>
-              <h2 style={{ margin: 0, fontSize: '1.3rem', color: '#1e293b' }}>Supervision des Commissions</h2>
+              <h2 style={{ margin: 0, fontSize: '1.3rem', color: '#1e293b' }}>Supervision des ZES</h2>
             </div>
-            <p style={{ color: '#64748b', margin: '0 0 1.5rem 0', lineHeight: '1.5' }}>Suivi des travaux en commission, rapports d'information et projets de loi en cours d'examen.</p>
+            <p style={{ color: '#64748b', margin: '0 0 1.5rem 0', lineHeight: '1.5' }}>Pilotage du développement des Zones Économiques Spéciales (Diass, Sandiara, etc.).</p>
             <button style={{ width: '100%', padding: '12px', background: '#f1f5f9', border: 'none', borderRadius: '8px', color: '#334155', fontWeight: 'bold', cursor: 'pointer' }}>Voir les tableaux de bord</button>
           </div>
 
@@ -59,9 +59,9 @@ const PortailBureau = () => {
               <div style={{ background: '#fffbeb', padding: '15px', borderRadius: '12px', color: '#f59e0b' }}>
                 <Calendar size={28} />
               </div>
-              <h2 style={{ margin: 0, fontSize: '1.3rem', color: '#1e293b' }}>Agenda Législatif</h2>
+              <h2 style={{ margin: 0, fontSize: '1.3rem', color: '#1e293b' }}>Agenda Stratégique</h2>
             </div>
-            <p style={{ color: '#64748b', margin: '0 0 1.5rem 0', lineHeight: '1.5' }}>Calendrier des sessions ordinaires et extraordinaires, planifications des votes.</p>
+            <p style={{ color: '#64748b', margin: '0 0 1.5rem 0', lineHeight: '1.5' }}>Calendrier des missions de promotion économique, forums internationaux et roadshows.</p>
             <button style={{ width: '100%', padding: '12px', background: '#f1f5f9', border: 'none', borderRadius: '8px', color: '#334155', fontWeight: 'bold', cursor: 'pointer' }}>Gérer le calendrier</button>
           </div>
 
